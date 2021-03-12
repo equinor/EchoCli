@@ -1,9 +1,9 @@
 name: Build and Publish
 
 on:
-  push:
-    branches:
-      - dev
+  release:
+    types:
+      - beta
 jobs:
   build:
     runs-on: ubuntu-latest
