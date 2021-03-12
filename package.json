@@ -6,8 +6,12 @@
   "source": "src/test.js",
   "typings": "dist/index.d.ts",
   "scripts": {
-    "build": "tsc",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "echo-publish": "npm publish --access public",
+    "echo-publish-beta": "npm publish --access public --tag beta",
+    "echo-test": "npm ci & jest --watchAll",
+    "test": "jest",
+    "build": "tsc"
+ 
   },
   "keywords": [],
   "author": "Echo Core",
