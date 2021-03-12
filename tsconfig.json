@@ -1,0 +1,21 @@
+{
+  "include": ["src/**/*", "client"],
+  "compilerOptions": {                               
+    "module": "commonjs",
+    "declaration": true,
+    "noImplicitAny": false,
+    "removeComments": false,
+    "noLib": false,
+    "moduleResolution": "node",
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "skipLibCheck": true,
+    "sourceMap": true,
+    "lib": ["es6", "dom", "esnext"],           
+    "strict": true,
+    "rootDir": "./src",   
+    "outDir": "lib",                                                                        
+    "forceConsistentCasingInFileNames": true,
+    "target": "ES6"
+  }
+}
