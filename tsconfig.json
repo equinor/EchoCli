@@ -1,7 +1,7 @@
 {
   "include": ["src/**/*", "client"],
   "compilerOptions": {                               
-    "module": "commonjs",
+    "module": "ES6",
     "declaration": true,
     "noImplicitAny": false,
     "removeComments": false,
