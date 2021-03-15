@@ -1,8 +1,8 @@
 #!/usr/bin/env node
 import Command, { flags } from "@oclif/command";
 import * as figlet from "figlet";
-import { createProject } from "./scripts/create/createProject";
-import { promptForMissingOptions } from "./scripts/create/promptOptions";
+import { createProject } from "./tools/create/createProject";
+import { promptForMissingOptions } from "./tools/create/promptOptions";
 
 export default class CreateApp extends Command {
   public static description = "Creates a new Echo app";
