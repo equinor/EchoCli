@@ -11,7 +11,6 @@
     "echo-test": "npm ci & jest --watchAll",
     "test": "jest",
     "build": "tsc"
- 
   },
   "keywords": [],
   "author": "Echo Core",

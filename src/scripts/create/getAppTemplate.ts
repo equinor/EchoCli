@@ -10,10 +10,10 @@ export function getAppTemplate(templateName: string): string {
     case "library":
       template = "echoLibraryTemplate";
       break;
-
     default:
+      template = "echoAppTemplate";
       break;
   }
 
-  return `../../../../templates/${template}`;
+  return `../../../templates/${template}`;
 }

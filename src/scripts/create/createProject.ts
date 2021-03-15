@@ -1,6 +1,7 @@
-import * as chalk from "chalk";
+import chalk from "chalk";
 import * as fs from "fs";
-import * as Listr from "listr";
+import Listr from "listr";
+import path from "path";
 import { projectInstall } from "pkg-install";
 import { promisify } from "util";
 import { TemplateDir } from "../../types/createTypes";
@@ -8,8 +9,6 @@ import { copyTemplateFiles } from "./copyFile";
 import { createAndSetTargetDir } from "./createSetTargetDirectory";
 import { initGit } from "./gitInit";
 import { updatePackageConfig } from "./updatePackageConfig";
-
-import path = require("path");
 
 const access = promisify(fs.access);
 

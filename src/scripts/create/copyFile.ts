@@ -1,8 +1,8 @@
 import * as fs from "fs";
-import * as ncp from "ncp";
+import ncp from "ncp";
+import path from "path";
 import { promisify } from "util";
 import { TemplateDir } from "../../types/createTypes";
-import path = require("path");
 
 const copy = promisify(ncp);
 

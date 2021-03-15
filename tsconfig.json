@@ -1,12 +1,15 @@
+
 {
   "include": ["src/**/*", "client"],
   "compilerOptions": {                               
-    "module": "ES6",
+    "module": "CommonJS",
+    "esModuleInterop": true,
     "declaration": true,
     "noImplicitAny": false,
     "removeComments": false,
     "noLib": false,
     "moduleResolution": "node",
+    "allowSyntheticDefaultImports": true,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "skipLibCheck": true,
@@ -19,3 +22,4 @@
     "target": "ES6"
   }
 }
+

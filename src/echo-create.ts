@@ -1,5 +1,4 @@
 #!/usr/bin/env node
-
 import Command, { flags } from "@oclif/command";
 import * as figlet from "figlet";
 import { createProject } from "./scripts/create/createProject";

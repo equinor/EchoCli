@@ -1,6 +1,6 @@
-import execa = require("execa");
+import execa from "execa";
 import * as fs from "fs";
-import path = require("path");
+import path from "path";
 
 export async function initGit(targetDirectory: string): Promise<unknown> {
   const init = await execa("git", ["init"], {
@@ -10,7 +10,7 @@ export async function initGit(targetDirectory: string): Promise<unknown> {
     return Promise.reject(new Error("Failed to initialize git"));
   }
   const gitIgnorePath = path.join(targetDirectory || "", "/.gitignore");
-  await fs.writeFile(gitIgnorePath, "node_modules\r\n./dist", (err: any) => {
+  fs.writeFile(gitIgnorePath, "node_modules\r\n./dist", (err: any) => {
     if (err) {
       return Promise.reject(new Error("Failed to create .gitignore file"));
     }

@@ -1,8 +1,8 @@
-import chalk = require("chalk");
+import chalk from "chalk";
 import * as fs from "fs";
+import path from "path";
 import { promisify } from "util";
 import { TemplateDir } from "../../types/createTypes";
-import path = require("path");
 
 const access = promisify(fs.access);
 
