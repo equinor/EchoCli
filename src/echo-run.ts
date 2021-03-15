@@ -1,11 +1,5 @@
 #!/usr/bin/env node
 
-function start() {
-  const currentDir = process.cwd();
-  const [, , ...args] = process.argv;
+import { echoWatch } from "./tools/run/watch";
 
-  const pkg = require(`${currentDir}/package.json`);
-  console.log(pkg);
-}
-
-start();
+echoWatch();
