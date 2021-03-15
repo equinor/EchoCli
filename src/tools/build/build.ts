@@ -49,7 +49,7 @@ const outputOptions: OutputOptions = {
   sourcemap: true,
 };
 
-async function build() {
+export async function build() {
   console.log(
     figlet.textSync("Echo Cli", {
       font: "3D-ASCII",
@@ -68,5 +68,3 @@ async function build() {
     console.log(error);
   }
 }
-
-build();
