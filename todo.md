@@ -22,7 +22,6 @@ list of what to look in to:
 
 - Timer
 - CompileError
-
 - BuildApp extends Command
 - clearOutputDirAsync
 - runBuildAsync

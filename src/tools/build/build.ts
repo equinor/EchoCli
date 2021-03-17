@@ -1,26 +1,42 @@
 #!/usr/bin/env node
-import * as figlet from "figlet";
+import path from "path";
 import { OutputOptions, rollup, RollupOptions } from "rollup";
+import { getInputOptions, getOutputOptions } from "../../config/getOptions";
+
+export interface EchoBundleOptions {
+  watch?: boolean;
+  serve?: boolean;
+  currentDir: string;
+  wwwRoot: string;
+  inputOptions: RollupOptions;
+  outputOptions: OutputOptions;
+}
 
 export async function echoBundle(
-  inputOptions: RollupOptions,
-  outputOptions: OutputOptions
+  echoBundleOptions: Partial<EchoBundleOptions>
 ) {
-  console.log(
-    figlet.textSync("Echo Cli", {
-      font: "3D-ASCII",
-      horizontalLayout: "default",
-      verticalLayout: "default",
-    })
-  );
-  try {
-    const bundle = await rollup(inputOptions);
+  const options = getInitOptions(echoBundleOptions);
 
-    await bundle.write(outputOptions);
+  options.inputOptions = await getInputOptions(options);
+  options.outputOptions = await getOutputOptions(options);
+
+  try {
+    const bundle = await rollup(options.inputOptions);
+    await bundle.write(options.outputOptions);
 
     bundle.close();
     console.log("done!!");
   } catch (error) {
     console.log(error);
   }
+}
+
+function getInitOptions(
+  echoBundleOptions: Partial<EchoBundleOptions>
+): Partial<EchoBundleOptions> {
+  return {
+    ...echoBundleOptions,
+    currentDir: process.cwd(),
+    wwwRoot: path.resolve(__dirname, "../../../", "client"),
+  };
 }
