@@ -1,5 +1,5 @@
-export function getAppTemplate(templateName: string): string {
-  let template = "echoAppTemplate";
+export function getAppTemplateName(templateName: string): string {
+  let template = "";
   switch (templateName) {
     case "app":
       template = "echoAppTemplate";
@@ -15,5 +15,5 @@ export function getAppTemplate(templateName: string): string {
       break;
   }
 
-  return `../../../templates/${template}`;
+  return template;
 }

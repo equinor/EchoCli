@@ -1,11 +1,12 @@
 #!/usr/bin/env node
 import path from "path";
 import { OutputOptions, rollup, RollupOptions } from "rollup";
-import { getInputOptions, getOutputOptions } from "../../config/getOptions";
+import { getInputOptions, getOutputOptions } from "../../config/options";
 
 export interface EchoBundleOptions {
   watch?: boolean;
   serve?: boolean;
+  isProduction: boolean;
   currentDir: string;
   wwwRoot: string;
   inputOptions: RollupOptions;
@@ -13,9 +14,10 @@ export interface EchoBundleOptions {
 }
 
 export async function echoBundle(
-  echoBundleOptions: Partial<EchoBundleOptions>
+  echoBundleOptions: Partial<EchoBundleOptions>,
+  isDevelopment?: boolean
 ) {
-  const options = getInitOptions(echoBundleOptions);
+  const options = getInitOptions(echoBundleOptions, isDevelopment);
 
   options.inputOptions = await getInputOptions(options);
   options.outputOptions = await getOutputOptions(options);
@@ -32,10 +34,12 @@ export async function echoBundle(
 }
 
 function getInitOptions(
-  echoBundleOptions: Partial<EchoBundleOptions>
+  echoBundleOptions: Partial<EchoBundleOptions>,
+  isDevelopment?: boolean
 ): Partial<EchoBundleOptions> {
   return {
     ...echoBundleOptions,
+    isProduction: isDevelopment ? false : true,
     currentDir: process.cwd(),
     wwwRoot: path.resolve(__dirname, "../../../", "client"),
   };

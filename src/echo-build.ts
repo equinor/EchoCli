@@ -13,6 +13,10 @@ export default class CreateBundle extends Command {
       char: "s",
       description: "Add the serve Echo Client with app",
     }),
+    isDevelopment: flags.boolean({
+      char: "d",
+      description: "Production is default, add -d flag for development",
+    }),
   };
 
   public async run() {
@@ -26,7 +30,7 @@ export default class CreateBundle extends Command {
       })
     );
 
-    await echoBundle(options.flags);
+    await echoBundle(options.flags, options.flags.isDevelopment);
   }
 }
 

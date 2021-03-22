@@ -7,6 +7,7 @@ import { promisify } from "util";
 import { TemplateDir } from "../../types/createTypes";
 import { copyTemplateFiles } from "./copyFile";
 import { createAndSetTargetDir } from "./createSetTargetDirectory";
+import { getAppTemplateName } from "./getAppTemplateName";
 import { initGit } from "./gitInit";
 import { updatePackageConfig } from "./updatePackageConfig";
 
@@ -54,9 +55,9 @@ export async function createProject(options: TemplateDir) {
   ]);
 
   console.log(
-    `%s Creating ${chalk.cyan(options.templateName)} named ${chalk.green.bold(
-      options.name
-    )}`,
+    `%s Creating ${chalk.cyan(
+      getAppTemplateName(options.templateName)
+    )} named ${chalk.green.bold(options.name)}`,
     chalk.green.bold("START")
   );
 
@@ -68,9 +69,10 @@ export async function createProject(options: TemplateDir) {
 async function getTemplateDir(options: TemplateDir) {
   const templateDir = path.resolve(
     __filename,
-    `../../../../templates/${options.templateName}`
+    `../../../../templates/${getAppTemplateName(options.templateName)}`
   );
 
+  console.log(templateDir);
   try {
     await access(templateDir, fs.constants.R_OK);
   } catch (err) {
