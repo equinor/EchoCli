@@ -7,7 +7,7 @@ export async function getInputOptions(
   options: Partial<EchoBundleOptions>
 ): Promise<RollupOptions> {
   return {
-    input: `${options.currentDir}/index.ts`,
+    input: `${options.currentDir}/src/index.tsx`,
     external: getExternalsConfig(options),
     plugins: getBuildPlugging(options),
   };
@@ -19,7 +19,7 @@ export async function getOutputOptions(
   return {
     file: `${options.currentDir}/lib/index.js`,
     format: "cjs",
-    exports: "auto",
+    exports: "named",
     sourcemap: true,
   };
 }
