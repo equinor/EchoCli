@@ -3,7 +3,10 @@
     "version": "0.0.1",
     "description": "",
     "main": "src/app.tsx",
-    "scripts": {},
+    "scripts": {
+        "build": "echo-build",  
+        "start": "echo-build -w -d"  
+    },
     "author": "",
     "license": "ISC",
     "manifest": {
