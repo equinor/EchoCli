@@ -17,11 +17,9 @@ export async function echoBundle(
   echoBundleOptions: Partial<EchoBundleOptions>,
   isDevelopment?: boolean
 ) {
-  const options = getInitOptions(echoBundleOptions, isDevelopment);
-
+  const options = await getInitOptions(echoBundleOptions, isDevelopment);
   options.inputOptions = await getInputOptions(options);
   options.outputOptions = await getOutputOptions(options);
-
   try {
     const bundle = await rollup(options.inputOptions);
     await bundle.write(options.outputOptions);
@@ -33,10 +31,10 @@ export async function echoBundle(
   }
 }
 
-function getInitOptions(
+async function getInitOptions(
   echoBundleOptions: Partial<EchoBundleOptions>,
   isDevelopment?: boolean
-): Partial<EchoBundleOptions> {
+): Promise<Partial<EchoBundleOptions>> {
   return {
     ...echoBundleOptions,
     isProduction: isDevelopment ? false : true,
