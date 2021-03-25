@@ -5,6 +5,7 @@ import nodeResolve from "rollup-plugin-node-resolve";
 import typescript2 from "rollup-plugin-typescript2";
 import workerLoader from "rollup-plugin-web-worker-loader";
 import { EchoBundleOptions } from "../tools/build/build";
+import { merge } from "../utils/merge";
 import { babelConfig } from "./babel";
 import { productionConfig } from "./poductionConfig";
 import { serverConfig } from "./serverConfig";
@@ -15,13 +16,6 @@ const extensions = [".js", ".jsx", ".ts", ".tsx"];
 export function getBuildPlugging(
   options: Partial<EchoBundleOptions>
 ): Plugin[] {
-  const rtest = [
-    ...initialConfig(options),
-    ...productionConfig(options),
-    ...babelConfig(extensions),
-    ...uiPlugins(options),
-    ...serverConfig(options),
-  ];
   return merge(
     initialConfig(options),
     productionConfig(options),
@@ -42,14 +36,4 @@ export function initialConfig(options: Partial<EchoBundleOptions>): Plugin[] {
     typescript2(),
     commonjs(),
   ];
-}
-
-function merge<T>(...args: T[][]): T[] {
-  let plugins: T[] = [];
-  if (args.length > 0) {
-    args.forEach((pluginsItem: T[]) => {
-      plugins = plugins.concat(pluginsItem);
-    });
-  }
-  return plugins;
 }
