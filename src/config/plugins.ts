@@ -2,6 +2,7 @@ import { Plugin } from "rollup";
 import commonjs from "rollup-plugin-commonjs";
 import del from "rollup-plugin-delete";
 import nodeResolve from "rollup-plugin-node-resolve";
+import optimizeJs from "rollup-plugin-optimize-js";
 import typescript2 from "rollup-plugin-typescript2";
 import workerLoader from "rollup-plugin-web-worker-loader";
 import { EchoBundleOptions } from "../tools/build/build";
@@ -35,5 +36,6 @@ export function initialConfig(options: Partial<EchoBundleOptions>): Plugin[] {
     }),
     typescript2(),
     commonjs(),
+    optimizeJs(),
   ];
 }

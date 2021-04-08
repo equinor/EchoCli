@@ -18,7 +18,7 @@ export async function getOutputOptions(
 ): Promise<OutputOptions> {
   return {
     file: `${options.currentDir}/lib/index.js`,
-    format: "cjs",
+    format: "umd",
     exports: "named",
     sourcemap: true,
   };
