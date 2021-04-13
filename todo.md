@@ -4,37 +4,37 @@ echo-build, echo-run and echo-create are actions in EchoCli.
 
 # Echo App Template
 
-- [ ] App should be able to register what it needs,
-- [ ] Register api Made available trough setup function.
-- [ ] Registering Apps / Routes
-- [ ] Register App Settings
-- [ ] Register links connected to a tag.
-- [ ] Register External Link
-- [ ] Register Tag Application
+-   [ ] App should be able to register what it needs,
+-   [ ] Register api Made available trough setup function.
+-   [ ] Registering Apps / Routes
+-   [ ] Register App Settings
+-   [ ] Register links connected to a tag.
+-   [ ] Register External Link
+-   [ ] Register Tag Application
 
 Under we have purposed setup function defined with Piral and Pilet in mind
 
 ```javascript
 export default function setup(api: EchoApi) {
-  api.regesterApp("/myapp", {
-    Component,
-    Icon,
-    homeLink: true,
-    mainMenu: false,
-  });
-  api.regesterAppSettings("myapp", {
-    Component,
-    Icon,
-    homeLink: true,
-    main,
-    menu: false,
-  });
+    api.registerApp('/myapp', {
+        Component,
+        Icon,
+        homeLink: true,
+        mainMenu: false
+    });
+    api.registerAppSettings('myapp', {
+        Component,
+        Icon,
+        homeLink: true,
+        main,
+        menu: false
+    });
 
-  api.regesterTagLink("myapp", Component, { visible: () => Boolean });
-  api.regesterTagApp("mytagapp", Component, {});
-  api.regiserPanles();
+    api.registerTagLink('myapp', Component, { visible: () => Boolean });
+    api.registerTagApp('mytagapp', Component, {});
+    api.registerPanels();
 
-  api.regiserExternalLink();
+    api.registerExternalLink();
 }
 ```
 
