@@ -2,7 +2,7 @@
     "name": "echo-app-template",
     "version": "0.0.1",
     "description": "",
-    "main": "src/app.tsx",
+    "main": "src/index.ts",
     "scripts": {
         "build": "echo-build",  
         "start": "echo-build -w -d"  

@@ -17,19 +17,19 @@ export async function copyTemplateFiles(
     }
   );
 
-  const indexJsPath = path.join(
+  const indexTsPath = path.join(
     options.targetDirectory || "",
     "src",
-    "index.tsx"
+    "index.ts"
   );
-  const indexJsContent = fs.readFileSync(indexJsPath).toString();
+  const indexJsContent = fs.readFileSync(indexTsPath).toString();
 
   let indexJsContentReplaced = indexJsContent.replace(
     "{appKey}",
     options.key || "app-key"
   );
 
-  fs.writeFileSync(indexJsPath, indexJsContentReplaced);
+  fs.writeFileSync(indexTsPath, indexJsContentReplaced);
 
   return success;
 }
