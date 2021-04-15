@@ -15,13 +15,12 @@
     },
     "dependencies": {},
     "devDependencies": {
-        "@equinor/echo-cli": "0.0.1",
-        "@equinor/echo-components": "0.0.10",
-        "@equinor/echo-core": "^0.1.22",
-        "@equinor/echo-framework": "0.0.18",
-        "@equinor/echo-scripts": "^0.1.5",
-        "@equinor/echo-utils": "0.0.4",
-        "react": "^17.0.1",
-        "react-dom": "^17.0.1"
+        "@equinor/echo-cli": "latest",
+        "@equinor/echo-components": "latest",
+        "@equinor/echo-core": "latest",
+        "@equinor/echo-scripts": "latest",
+        "@equinor/echo-utils": "latest",
+        "react": "^17.0.2",
+        "react-dom": "^17.0.2"
     }
 }
