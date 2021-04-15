@@ -1,7 +1,8 @@
-export function echoWatch() {
-  const currentDir = process.cwd();
-  const [, , ...args] = process.argv;
+export function echoWatch(): void {
+    const currentDir = process.cwd();
+    const [, , ...args] = process.argv;
 
-  const pkg = require(`${currentDir}/package.json`);
-  console.log(pkg);
+    // eslint-disable-next-line @typescript-eslint/no-var-requires
+    const pkg = require(`${currentDir}/package.json`);
+    console.log(pkg);
 }

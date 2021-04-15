@@ -13,7 +13,8 @@
     "echo-publish-beta": "npm publish --access public --tag beta",
     "echo-test": "npm ci & jest --watchAll",
     "test": "jest",
-    "build": "tsc"
+    "build": "tsc",
+    "lint": "eslint --ext .js,.jsx,.ts,.tsx src --color"
   },
   "keywords": [],
   "author": "Echo Core",
@@ -70,13 +71,13 @@
     "rollup-plugin-json": "^4.0.0",
     "rollup-plugin-livereload": "^2.0.0",
     "rollup-plugin-node-resolve": "^5.2.0",
+    "rollup-plugin-optimize-js": "0.0.4",
+    "rollup-plugin-postcss": "^4.0.0",
     "rollup-plugin-preserve-shebangs": "^0.2.0",
     "rollup-plugin-serve": "^1.1.0",
     "rollup-plugin-typescript-paths": "^1.2.2",
     "rollup-plugin-typescript2": "^0.30.0",
     "rollup-plugin-web-worker-loader": "^1.6.1",
-    "rollup-plugin-optimize-js": "0.0.4",
-    "rollup-plugin-postcss": "^4.0.0",
     "typescript": "^4.2.3"
   },
   "files": [

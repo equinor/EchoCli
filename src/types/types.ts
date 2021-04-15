@@ -1,4 +1,4 @@
 export interface EchoOptions {
-  output?: string;
-  input?: string;
+    output?: string;
+    input?: string;
 }
