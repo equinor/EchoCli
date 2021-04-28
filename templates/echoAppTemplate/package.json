@@ -4,8 +4,8 @@
     "description": "",
     "main": "src/index.ts",
     "scripts": {
-        "build": "echo-build",  
-        "start": "echo-build -w -d"  
+        "build": "echo-build",
+        "start": "echo-build -w -d"
     },
     "author": "",
     "license": "ISC",
@@ -15,11 +15,12 @@
     },
     "dependencies": {},
     "devDependencies": {
-        "@equinor/echo-cli": "latest",
-        "@equinor/echo-components": "latest",
-        "@equinor/echo-core": "latest",
-        "@equinor/echo-scripts": "latest",
-        "@equinor/echo-utils": "latest",
+        "@equinor/echo-base": "^0.2.61",
+        "@equinor/echo-cli": "0.0.11",
+        "@equinor/echo-components": " 0.0.12",
+        "@equinor/echo-core": "^0.1.46",
+        "@equinor/echo-scripts": "0.1.5",
+        "@equinor/echo-utils": "0.0.9",
         "react": "^17.0.2",
         "react-dom": "^17.0.2"
     }

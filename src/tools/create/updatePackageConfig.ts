@@ -23,8 +23,10 @@ export async function updatePackageConfig(options: TemplateDir): Promise<void> {
     const config = JSON.parse(fs.readFileSync(configPath).toString());
     config.name = options.key;
     config.manifest.name = options.name;
-    config.description = options.description;
+    config.manifest.key = options.key;
     config.manifest.shortName = options.shortName;
+    config.manifest.path = `/${options.shortName}`;
+    config.description = options.description;
     config.scripts = {
         ...config.scripts
     };
