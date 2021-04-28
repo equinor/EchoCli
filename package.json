@@ -1,6 +1,6 @@
 {
   "name": "@equinor/echo-cli",
-  "version": "0.0.12",
+  "version": "0.0.17",
   "description": "Command line interface for Echo Apps",
   "main": "dist/index.js",
   "source": "src/test.js",
@@ -25,6 +25,11 @@
     "echo-run": "./lib/echo-run.js",
     "echo-build": "./lib/echo-build.js"
   },
+  "files": [
+    "lib",
+    "templates",
+    "client"
+  ],
   "devDependencies": {
     "@babel/core": "^7.12.10",
     "@babel/preset-env": "^7.12.11",
@@ -79,9 +84,5 @@
     "rollup-plugin-typescript2": "^0.30.0",
     "rollup-plugin-web-worker-loader": "^1.6.1",
     "typescript": "^4.2.3"
-  },
-  "files": [
-    "dist/",
-    "templates"
-  ]
+  }
 }

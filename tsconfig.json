@@ -1,6 +1,6 @@
 
 {
-  "include": ["src/**/*", "client"],
+  "include": ["src/**/*"],
   "compilerOptions": {                               
     "module": "CommonJS",
     "esModuleInterop": true,
