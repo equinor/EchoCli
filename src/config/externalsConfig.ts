@@ -1,6 +1,6 @@
-import { EchoBundleOptions } from '../tools/build/build';
+import { ExternalOption } from 'rollup';
 
-export function getExternalsConfig(options: Partial<EchoBundleOptions>): string[] {
+export function getExternalsConfig(): ExternalOption {
     return [
         'react',
         'react-dom',

@@ -1,17 +1,18 @@
-import livereload from 'rollup-plugin-livereload';
-import serve from 'rollup-plugin-serve';
+import server from 'rollup-plugin-server';
 import { EchoBundleOptions } from '../tools/build/build';
 
 export function serverConfig(options: Partial<EchoBundleOptions>): Plugin[] {
     if (options.serve) {
         return [
-            serve({
-                contentBase: options.wwwRoot,
+            server({
+                contentBase: [options.wwwRoot, `${options.currentDir}/build`],
                 port: 3000,
                 verbose: true,
-                open: false
-            }),
-            livereload({ watch: options.wwwRoot })
+                open: true,
+                ssl: true,
+                host: 'localhost',
+                historyApiFallback: true
+            })
         ];
     }
     return [];

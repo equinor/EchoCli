@@ -19,7 +19,7 @@
     "strict": true,
     "rootDir": "./src",   
     "outDir": "lib",                                                                        
-    "target": "ES6"
+    "target": "ES6",
   }
 }
 

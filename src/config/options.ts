@@ -1,21 +1,30 @@
-import { OutputOptions, RollupOptions } from 'rollup';
+import path from 'path';
+import { OutputOptions, RollupOptions, WatcherOptions } from 'rollup';
 import { EchoBundleOptions } from '../tools/build/build';
-import { getExternalsConfig } from './externalsConfig';
+import echoModuleCreator from './echoModulePlugin';
 import { getBuildPlugging } from './plugins';
 
 export async function getInputOptions(options: Partial<EchoBundleOptions>): Promise<RollupOptions> {
     return {
-        input: `${options.currentDir}/src/index.tsx`,
-        external: getExternalsConfig(options),
-        plugins: getBuildPlugging(options)
+        input: path.join(options.currentDir || '', options.source ? options.source : '/src/index.tsx'),
+        external: options.peerDependencies && Object.keys(options.peerDependencies),
+        plugins: getBuildPlugging(options),
+        watch: {
+            include: ['/src']
+        } as WatcherOptions
     };
 }
 
 export async function getOutputOptions(options: Partial<EchoBundleOptions>): Promise<OutputOptions> {
+    const file = path.join(options.currentDir || '', options.main ? options.main : '/build/index.js');
     return {
-        file: `${options.currentDir}/lib/index.js`,
+        file,
         format: 'umd',
         exports: 'named',
-        sourcemap: true
+        sourcemap: true,
+        name: 'echo-module',
+        compact: true,
+        globals: options.peerDependencies,
+        plugins: [echoModuleCreator(file, options.main ? options.main : 'index.js', options.requireRef)]
     };
 }

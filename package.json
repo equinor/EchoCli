@@ -1,6 +1,6 @@
 {
   "name": "@equinor/echo-cli",
-  "version": "0.0.17",
+  "version": "0.0.21",
   "description": "Command line interface for Echo Apps",
   "main": "dist/index.js",
   "source": "src/test.js",
@@ -23,7 +23,8 @@
   "bin": {
     "echo-create": "./lib/echo-create.js",
     "echo-run": "./lib/echo-run.js",
-    "echo-build": "./lib/echo-build.js"
+    "echo-build": "./lib/echo-build.js",
+    "echo-manifest": "./lib/echo-manifest.js"
   },
   "files": [
     "lib",
@@ -79,7 +80,7 @@
     "rollup-plugin-optimize-js": "0.0.4",
     "rollup-plugin-postcss": "^4.0.0",
     "rollup-plugin-preserve-shebangs": "^0.2.0",
-    "rollup-plugin-serve": "^1.1.0",
+    "rollup-plugin-server": "^0.7.0",
     "rollup-plugin-typescript-paths": "^1.2.2",
     "rollup-plugin-typescript2": "^0.30.0",
     "rollup-plugin-web-worker-loader": "^1.6.1",
