@@ -28,7 +28,7 @@ export async function createEchoModuleManifest(currentPath?: string, requireRef?
     const pkj = JSON.parse(fs.readFileSync(configPath).toString());
 
     try {
-        const newEchoModuleManifest = {
+        const newEchoModuleManifest = [{
             name: pkj.name,
             key: pkj.manifest.key,
             shortName: pkj.manifest.shortName,
@@ -36,7 +36,7 @@ export async function createEchoModuleManifest(currentPath?: string, requireRef?
             path: pkj.manifest.path,
             version: pkj.version,
             requireRef
-        };
+        }];
         fs.writeFileSync(filePath, JSON.stringify(newEchoModuleManifest, null, 4));
     } catch (error) {
         console.error(error);

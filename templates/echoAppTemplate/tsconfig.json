@@ -19,7 +19,6 @@
     "resolveJsonModule": true,
     "moduleResolution": "node",
     "downlevelIteration": true,
-    "declaration": true,
     "types": ["@equinor/echo-scripts"],
   }
 }
