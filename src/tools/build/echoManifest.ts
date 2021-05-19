@@ -5,7 +5,7 @@ import { promisify } from 'util';
 
 const access = promisify(fs.access);
 
-export async function createEchoModuleManifest(currentPath?: string, requireRef?: string ): Promise<void> {
+export async function createEchoModuleManifest(currentPath?: string, requireRef?: string): Promise<void> {
     if (!currentPath) {
         console.error('%s The current path is undefined ', chalk.red.bold('ERROR'));
         return;
@@ -28,15 +28,17 @@ export async function createEchoModuleManifest(currentPath?: string, requireRef?
     const pkj = JSON.parse(fs.readFileSync(configPath).toString());
 
     try {
-        const newEchoModuleManifest = [{
-            name: pkj.name,
-            key: pkj.manifest.key,
-            shortName: pkj.manifest.shortName,
-            fileUri: getFilePath(pkj.main),
-            path: pkj.manifest.path,
-            version: pkj.version,
-            requireRef
-        }];
+        const newEchoModuleManifest = [
+            {
+                name: pkj.name,
+                key: pkj.manifest.key,
+                shortName: pkj.manifest.shortName,
+                fileUri: getFilePath(pkj.main),
+                path: pkj.manifest.path,
+                version: pkj.version,
+                requireRef
+            }
+        ];
         fs.writeFileSync(filePath, JSON.stringify(newEchoModuleManifest, null, 4));
     } catch (error) {
         console.error(error);

@@ -1,5 +1,5 @@
 import path from 'path';
-import { OutputOptions, RollupOptions, WatcherOptions } from 'rollup';
+import { OutputOptions, RollupOptions } from 'rollup';
 import { EchoBundleOptions } from '../tools/build/build';
 import echoModuleCreator from './echoModulePlugin';
 import { getBuildPlugging } from './plugins';
@@ -8,10 +8,7 @@ export async function getInputOptions(options: Partial<EchoBundleOptions>): Prom
     return {
         input: path.join(options.currentDir || '', options.source ? options.source : '/src/index.tsx'),
         external: options.peerDependencies && Object.keys(options.peerDependencies),
-        plugins: getBuildPlugging(options),
-        watch: {
-            include: ['/src']
-        } as WatcherOptions
+        plugins: getBuildPlugging(options)
     };
 }
 

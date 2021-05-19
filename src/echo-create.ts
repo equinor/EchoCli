@@ -1,8 +1,8 @@
 #!/usr/bin/env node
 import Command, { flags } from '@oclif/command';
-import * as figlet from 'figlet';
 import { createProject } from './tools/create/createProject';
 import { promptForMissingOptions } from './tools/create/promptOptions';
+import { echoCliLogo } from './utils/logo';
 
 export default class CreateApp extends Command {
     public static description = 'Creates a new Echo app';
@@ -29,15 +29,7 @@ export default class CreateApp extends Command {
 
     public async run(): Promise<void> {
         const parsed = this.parse(CreateApp);
-
-        console.log(
-            figlet.textSync('Echo CLI', {
-                font: '3D-ASCII',
-                horizontalLayout: 'default',
-                verticalLayout: 'default'
-            })
-        );
-
+        echoCliLogo();
         const options = await promptForMissingOptions(parsed.flags);
         await createProject(options);
     }

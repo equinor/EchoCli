@@ -6,7 +6,7 @@ const baseApiUrl = EchoEnv.env().REACT_APP_API_URL;
 
 async function getVersion(): Promise<string> {
     const data = await EchoCore.EchoClient.fetch(`${baseApiUrl}/Version`);
-    return await data.json();
+    return await data.text();
 }
 
 const App: React.FC = (): JSX.Element => {

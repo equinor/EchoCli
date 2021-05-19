@@ -2,7 +2,7 @@
 import chalk from 'chalk';
 import * as fs from 'fs';
 import path from 'path';
-import { OutputOptions, rollup, RollupOptions } from 'rollup';
+import { OutputOptions, rollup, RollupOptions, watch } from 'rollup';
 import { promisify } from 'util';
 import { getInputOptions, getOutputOptions } from '../../config/options';
 import { createEchoModuleManifest } from './echoManifest';
@@ -23,27 +23,69 @@ export interface EchoBundleOptions {
     dependencies: Record<string, string>;
     devDependencies: Record<string, string>;
     requireRef: string;
+    name: string;
+}
+
+async function echoWatch(options: Partial<EchoBundleOptions>): Promise<void> {
+    const WATCH_OPTS = {
+        exclude: 'node_modules/**',
+        chokidar: true,
+        clearScreen: true
+    };
+
+    const watchOptions = Object.assign(
+        {
+            output: options.outputOptions,
+            watch: WATCH_OPTS
+        },
+        options.inputOptions
+    );
+
+    new Promise((resolve) => {
+        const watcher = watch(watchOptions).on('event', (e) => {
+            if (e.code === 'START') {
+                console.log('%s Compiling Module!', chalk.cyan.bold('START'));
+            }
+            if (e.code === 'ERROR') {
+                console.log(`%s ${e}`, chalk.red.bold('ERROR'));
+            }
+            if (e.code === 'END') {
+                console.log('%s Module ready!', chalk.green.bold('DONE'));
+            }
+        });
+
+        resolve({ watcher });
+    });
 }
 
 export async function echoBundle(
     echoBundleOptions: Partial<EchoBundleOptions>,
     isDevelopment?: boolean
 ): Promise<void> {
-
     const options = await getInitOptions(echoBundleOptions, isDevelopment);
+
     options.inputOptions = await getInputOptions(options);
     options.outputOptions = await getOutputOptions(options);
-    
+    await createEchoModuleManifest(options.currentDir, options.requireRef);
+
     try {
+        if (options.serve) {
+            echoWatch(options);
+            return;
+        }
+
+        console.log(
+            `%s Creating ${chalk.cyan('module')} named ${chalk.green.bold(options.name)}`,
+            chalk.green.bold('START')
+        );
         const bundle = await rollup(options.inputOptions);
         await bundle.write(options.outputOptions);
-        await createEchoModuleManifest(options.currentDir, options.requireRef);
-
         bundle.close();
-        console.log('done!!');
     } catch (error) {
         console.log(error);
     }
+
+    console.log('%s Module ready!', chalk.green.bold('DONE'));
 }
 
 async function getInitOptions(
@@ -72,10 +114,11 @@ async function getInitOptions(
         currentDir,
         source: pkj.source,
         main: pkj.main,
+        name: pkj.name,
         peerDependencies: pkj.peerDependencies,
         dependencies: pkj.dependencies,
         devDependencies: pkj.devDependencies,
         wwwRoot: path.resolve(__dirname, '../../../', 'client'),
-        requireRef: "echoDepLoader"
+        requireRef: 'echoDepLoader'
     };
 }
