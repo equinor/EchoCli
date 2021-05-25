@@ -51,7 +51,7 @@ export async function createProject(options: TemplateDir): Promise<boolean> {
     ]);
 
     console.log(
-        `%s Creating ${chalk.cyan(getAppTemplateName(options.templateName))} named ${chalk.green.bold(options.name)}`,
+        `Creating ${chalk.cyan(getAppTemplateName(options.templateName))} named ${chalk.green.bold(options.name)}`,
         chalk.green.bold('START')
     );
 

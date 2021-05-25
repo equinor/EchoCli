@@ -1,7 +1,9 @@
 #!/usr/bin/env node
 import chalk from 'chalk';
 import * as fs from 'fs';
+import Listr from 'listr';
 import path from 'path';
+import pem from 'pem';
 import { OutputOptions, rollup, RollupOptions, watch } from 'rollup';
 import { promisify } from 'util';
 import { getInputOptions, getOutputOptions } from '../../config/options';
@@ -24,6 +26,29 @@ export interface EchoBundleOptions {
     devDependencies: Record<string, string>;
     requireRef: string;
     name: string;
+    https: Https;
+}
+
+type Https = {
+    key: string;
+    cert: string;
+    ca: string;
+};
+
+async function createHttps(): Promise<Https> {
+    return new Promise((resolve, reject) => {
+        pem.createCertificate({ days: 1, selfSigned: true }, (err, keys) => {
+            if (err) {
+                reject(err);
+            }
+
+            const https = { key: '', cert: '' } as Https;
+            https.key = keys.serviceKey;
+            https.cert = keys.certificate;
+            https.ca = keys.csr;
+            resolve(https);
+        });
+    });
 }
 
 async function echoWatch(options: Partial<EchoBundleOptions>): Promise<void> {
@@ -44,13 +69,13 @@ async function echoWatch(options: Partial<EchoBundleOptions>): Promise<void> {
     new Promise((resolve) => {
         const watcher = watch(watchOptions).on('event', (e) => {
             if (e.code === 'START') {
-                console.log('%s Compiling Module!', chalk.cyan.bold('START'));
+                console.log('%s Compiling Module', chalk.cyan.bold('START'));
             }
             if (e.code === 'ERROR') {
-                console.log(`%s ${e}`, chalk.red.bold('ERROR'));
+                console.log(`%s ${JSON.stringify(e)}`, chalk.red.bold('ERROR'));
             }
             if (e.code === 'END') {
-                console.log('%s Module ready!', chalk.green.bold('DONE'));
+                console.log('%s Module ready', chalk.green.bold('DONE'));
             }
         });
 
@@ -63,10 +88,36 @@ export async function echoBundle(
     isDevelopment?: boolean
 ): Promise<void> {
     const options = await getInitOptions(echoBundleOptions, isDevelopment);
+    const tasks = new Listr([
+        {
+            task: async (): Promise<void> => {
+                options.https = await createHttps();
+            },
+            title: 'Get SSL Certificate'
+        },
+        {
+            task: async (): Promise<void> => {
+                options.inputOptions = await getInputOptions(options);
+            },
+            title: 'Generate Input Options'
+        },
+        {
+            task: async (): Promise<void> => {
+                options.outputOptions = await getOutputOptions(options);
+            },
+            title: 'Generate Output Options'
+        },
+        {
+            task: async (): Promise<void> => {
+                await createEchoModuleManifest(options.currentDir, options.requireRef);
+            },
+            title: 'Create Echo Manifest'
+        }
+    ]);
 
-    options.inputOptions = await getInputOptions(options);
-    options.outputOptions = await getOutputOptions(options);
-    await createEchoModuleManifest(options.currentDir, options.requireRef);
+    console.log(`Creating ${chalk.cyan('module')} configuration for ${chalk.green.bold(options.name)}`);
+
+    await tasks.run();
 
     try {
         if (options.serve) {
@@ -74,12 +125,9 @@ export async function echoBundle(
             return;
         }
 
-        console.log(
-            `%s Creating ${chalk.cyan('module')} named ${chalk.green.bold(options.name)}`,
-            chalk.green.bold('START')
-        );
-        const bundle = await rollup(options.inputOptions);
-        await bundle.write(options.outputOptions);
+        console.log(`%s Compiling Module`, chalk.cyan.bold('START'));
+        const bundle = await rollup(options.inputOptions as RollupOptions);
+        await bundle.write(options.outputOptions as RollupOptions);
         bundle.close();
     } catch (error) {
         console.log(error);
