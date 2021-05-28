@@ -21,7 +21,7 @@ export async function updatePackageConfig(options: TemplateDir): Promise<void> {
     }
 
     const config = JSON.parse(fs.readFileSync(configPath).toString());
-    config.name = options.key;
+    config.name = `@equinor/echo-${options.name.trim().toLocaleLowerCase()}`;
     config.manifest.name = options.name;
     config.manifest.key = options.key;
     config.manifest.shortName = options.shortName;

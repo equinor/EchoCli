@@ -42,7 +42,7 @@ export async function promptForMissingOptions(options: Partial<TemplateDir>): Pr
     if (!options.templateName) {
         templateQuestion.push({
             default: 'app',
-            message: 'Please enter a app template (app | module | plugin)',
+            message: 'Please enter a app template (app | appTutorial)',
             name: 'template',
             type: 'input'
         });

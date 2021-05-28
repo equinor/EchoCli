@@ -4,6 +4,9 @@ export function getAppTemplateName(templateName: string): string {
         case 'app':
             template = 'echoAppTemplate';
             break;
+        case 'appTutorial':
+            template = 'echoAppTemplateTutorial';
+            break;
         case 'plugin':
             template = 'echoPluginTemplate';
             break;
