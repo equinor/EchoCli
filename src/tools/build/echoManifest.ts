@@ -13,6 +13,13 @@ export async function createEchoModuleManifest(currentPath?: string, requireRef?
 
     const configPath = path.join(currentPath || '', '/package.json');
     const filePath = `${currentPath}/build/echoModuleManifest.json`;
+    const buildPath = `${currentPath}/build`;
+
+    if (!fs.existsSync(buildPath)) {
+        fs.mkdirSync(buildPath, {
+            recursive: true
+        });
+    }
 
     try {
         await access(configPath, fs.constants.R_OK);
