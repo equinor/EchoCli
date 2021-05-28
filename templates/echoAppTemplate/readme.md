@@ -7,7 +7,7 @@ This module has been bootstrapped by EchoCli.
 ### NPM
 
 ```sh-session
-$ npm install @equinor/echo-%moduleName% --save
+$ npm install @equinor/echo-module-%moduleName% --save
 ```
 
 # Development

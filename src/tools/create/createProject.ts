@@ -10,6 +10,7 @@ import { createAndSetTargetDir } from './createSetTargetDirectory';
 import { getAppTemplateName } from './getAppTemplateName';
 import { initGit } from './gitInit';
 import { updatePackageConfig } from './updatePackageConfig';
+import { updateReadme } from './updateReadme';
 
 const access = promisify(fs.access);
 
@@ -38,6 +39,10 @@ export async function createProject(options: TemplateDir): Promise<boolean> {
         {
             task: (): Promise<void> => updatePackageConfig(options),
             title: 'Update package config'
+        },
+        {
+            task: (): Promise<void> => updateReadme(options),
+            title: 'Update Readme'
         },
         {
             skip: (): string | undefined =>

@@ -6,7 +6,7 @@ import { TemplateDir } from '../../types/createTypes';
 
 const access = promisify(fs.access);
 
-export async function updatePackageConfig(options: TemplateDir): Promise<void> {
+export async function updateReadme(options: TemplateDir): Promise<void> {
     const readmePath = path.join(options.targetDirectory || '', '/readme.md');
 
     try {
@@ -21,7 +21,6 @@ export async function updatePackageConfig(options: TemplateDir): Promise<void> {
     }
 
     const readme = fs.readFileSync(readmePath).toString();
-    readme.replace(/moduleName/, options.name);
 
-    fs.writeFileSync(readmePath, JSON.stringify(readme, null, 4));
+    fs.writeFileSync(readmePath, readme.replace(new RegExp(/\%moduleName\%/, 'g'), options.name));
 }
