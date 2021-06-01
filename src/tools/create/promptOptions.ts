@@ -24,9 +24,17 @@ export async function promptForMissingOptions(options: Partial<TemplateDir>): Pr
     }
     if (!options.shortName) {
         questions.push({
-            default: selectedName.name,
+            default: selectedName && cleanText(selectedName.name),
             message: 'Please enter a app shortname',
             name: 'shortName',
+            type: 'input'
+        });
+    }
+    if (!options.path) {
+        questions.push({
+            default: selectedName && `/${cleanText(selectedName.name)}`,
+            message: 'Please enter a app path',
+            name: 'path',
             type: 'input'
         });
     }
@@ -67,17 +75,24 @@ export async function promptForMissingOptions(options: Partial<TemplateDir>): Pr
         });
     }
     const answers = await inquirer.prompt(questions);
-    console.log(selectedTemplate.template);
     return {
         ...options,
         description: options.description || answers.description,
         git: options.git || answers.git,
         install: options.install || answers.install,
         key: options.key || answers.key,
+        path: options.path || answers.path,
         name: selectedName.name,
         shortName: options.shortName || answers.shortName,
         templateName: selectedTemplate.template
     };
+}
+
+function cleanText(text: string): string {
+    return text
+        .toLowerCase()
+        .replace(/[^\w ]+/g, '')
+        .replace(/ +/g, '');
 }
 
 function slugify(text: string): string {

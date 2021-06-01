@@ -3,6 +3,7 @@ export interface CreatBase {
     key: string;
     description: string;
     shortName: string;
+    path: string;
     git: boolean;
     install: boolean;
     templateName: string;

@@ -37,12 +37,13 @@ export async function createEchoModuleManifest(currentPath?: string, requireRef?
     try {
         const newEchoModuleManifest = [
             {
-                name: pkj.name,
+                name: pkj.manifest.name,
                 key: pkj.manifest.key,
                 shortName: pkj.manifest.shortName,
                 fileUri: getFilePath(pkj.main),
                 path: pkj.manifest.path,
                 version: pkj.version,
+                private: pkj.manifest.private,
                 requireRef
             }
         ];
