@@ -72,7 +72,8 @@ async function echoWatch(options: Partial<EchoBundleOptions>): Promise<void> {
                 console.log('%s Compiling Module', chalk.cyan.bold('START'));
             }
             if (e.code === 'ERROR') {
-                console.log(`%s ${JSON.stringify(e)}`, chalk.red.bold('ERROR'));
+                console.log(`%s ${e.error.message}`, chalk.red.bold(e.code));
+                console.log(e.error.stack);
             }
             if (e.code === 'END') {
                 console.log('%s Module ready', chalk.green.bold('DONE'));

@@ -22,6 +22,7 @@ export default class CreateBundle extends Command {
     public async run(): Promise<void> {
         const options = this.parse(CreateBundle);
         echoCliLogo();
+        console.log('----------------> EchoCli Dev');
         await echoBundle(options.flags, options.flags.isDevelopment);
     }
 }
