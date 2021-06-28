@@ -1,19 +1,19 @@
-import path from 'path';
 import { OutputOptions, RollupOptions } from 'rollup';
-import { EchoBundleOptions } from '../tools/build/build';
+import { getBuildFilePath, getSrcFilePath } from '../common/getCurrentIndexFile';
+import { EchoBundleOptions } from '../common/initOptions';
 import echoModuleCreator from './echoModulePlugin';
 import { getBuildPlugging } from './plugins';
 
-export async function getInputOptions(options: Partial<EchoBundleOptions>): Promise<RollupOptions> {
+export async function defineRollupInputOptions(options: Partial<EchoBundleOptions>): Promise<RollupOptions> {
     return {
-        input: path.join(options.currentDir || '', options.source ? options.source : '/src/index.tsx'),
+        input: getSrcFilePath(options.currentDir, options.source),
         external: options.peerDependencies && Object.keys(options.peerDependencies),
         plugins: getBuildPlugging(options)
     };
 }
 
-export async function getOutputOptions(options: Partial<EchoBundleOptions>): Promise<OutputOptions> {
-    const file = path.join(options.currentDir || '', options.main ? options.main : '/build/index.js');
+export async function defineRollupOutputOptions(options: Partial<EchoBundleOptions>): Promise<OutputOptions> {
+    const file = getBuildFilePath(options.currentDir, options.main);
     return {
         file,
         format: 'umd',

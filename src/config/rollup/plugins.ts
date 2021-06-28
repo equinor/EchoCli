@@ -11,25 +11,24 @@ import nodePolyfills from 'rollup-plugin-node-polyfills';
 import postcss from 'rollup-plugin-postcss';
 import typescript2 from 'rollup-plugin-typescript2';
 import workerLoader from 'rollup-plugin-web-worker-loader';
-import { EchoBundleOptions } from '../tools/build/build';
-import { merge } from '../utils/merge';
-import { productionConfig } from './poductionConfig';
+import { merge } from '../../utils/merge';
+import { extensions } from '../common/extensions';
+import { EchoRollupOptions } from '../common/initOptions';
+import { productionConfig } from './productionConfig';
 import { serverConfig } from './serverConfig';
 
-const extensions = ['.js', '.jsx', '.ts', '.tsx'];
-
-export function getBuildPlugging(options: Partial<EchoBundleOptions>): Plugin[] {
+export function getBuildPlugging(options: Partial<EchoRollupOptions>): Plugin[] {
     return merge(initialConfig(options), productionConfig(options), serverConfig(options));
 }
 
-export function initialConfig(options: Partial<EchoBundleOptions>): Plugin[] {
+export function initialConfig(options: Partial<EchoRollupOptions>): Plugin[] {
     return [
         del({ targets: `${options.currentDir}/lib/*`, runOnce: true }),
         nodePolyfills({
             fs: true
         }),
         nodeResolve({
-            extensions,
+            extensions: extensions,
             preferBuiltins: true,
             browser: true
         }),
