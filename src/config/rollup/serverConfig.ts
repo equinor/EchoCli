@@ -1,18 +1,19 @@
 // import server from 'rollup-plugin-server';
 import livereload from 'rollup-plugin-livereload';
 import serve from 'rollup-plugin-serve';
-import { EchoBundleOptions } from '../tools/build/build';
+import { EchoRollupOptions } from '../common/initOptions';
 
-export function serverConfig(options: Partial<EchoBundleOptions>): Plugin[] {
-    if (options.serve && options.wwwRoot) {
+export function serverConfig(options: Partial<EchoRollupOptions>): Plugin[] {
+    if (options.serve && options.wwwRoot && options.echoModuleConfig) {
+        const { contentBase, port, open, host } = options.echoModuleConfig.server;
         return [
             serve({
-                contentBase: [`${options.currentDir}/build`, options.wwwRoot],
-                port: 3000,
+                contentBase: [`${options.currentDir}/${contentBase}`, options.wwwRoot],
+                port: port,
                 verbose: true,
-                open: true,
+                open: open,
                 https: options.https,
-                host: 'localhost',
+                host: host,
                 historyApiFallback: true
             }),
 
