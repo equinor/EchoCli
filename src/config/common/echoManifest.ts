@@ -1,19 +1,24 @@
 import chalk from 'chalk';
 import * as fs from 'fs';
-import path from 'path';
-import { promisify } from 'util';
+import { EchoModuleConfig } from './echoModuleConfig';
+import getPackageJson from './getPackageJson';
 
-const access = promisify(fs.access);
-
-export async function createEchoModuleManifest(currentPath?: string, requireRef?: string): Promise<void> {
+export async function createEchoModuleManifest(
+    echoModuleConfig: EchoModuleConfig,
+    currentPath?: string,
+    requireRef?: string,
+    adminModulePath?: string,
+    adminModule?: boolean
+): Promise<void> {
     if (!currentPath) {
         console.error('%s The current path is undefined ', chalk.red.bold('ERROR'));
         return;
     }
 
-    const configPath = path.join(currentPath || '', '/package.json');
-    const filePath = `${currentPath}/build/echoModuleManifest.json`;
-    const buildPath = `${currentPath}/build`;
+    const pkj = await getPackageJson(currentPath);
+
+    const buildPath = `${currentPath}${echoModuleConfig.server.contentBase}`;
+    const filePath = `${buildPath}/echoModuleManifest.json`;
 
     if (!fs.existsSync(buildPath)) {
         fs.mkdirSync(buildPath, {
@@ -22,28 +27,25 @@ export async function createEchoModuleManifest(currentPath?: string, requireRef?
     }
 
     try {
-        await access(configPath, fs.constants.R_OK);
-    } catch (err) {
-        if (err instanceof Error) {
-            console.error('%s Cant access package.json', chalk.red.bold('ERROR'));
-            process.exit(1);
-        } else {
-            throw err;
-        }
-    }
-
-    const pkj = JSON.parse(fs.readFileSync(configPath).toString());
-
-    try {
         const newEchoModuleManifest = [
             {
-                name: pkj.manifest.name,
-                key: pkj.manifest.key,
-                shortName: pkj.manifest.shortName,
-                fileUri: getFilePath(pkj.main),
-                path: pkj.manifest.path,
+                name: echoModuleConfig.manifest.name,
+                key: echoModuleConfig.manifest.key,
+                shortName: echoModuleConfig.manifest.shortName,
+                fileUri: getFileUriPath(pkj.main),
+                path: echoModuleConfig.manifest.path,
                 version: pkj.version,
-                private: pkj.manifest.private,
+                private: echoModuleConfig.manifest.private,
+                requireRef
+            },
+            adminModule && {
+                name: 'Echo Administration',
+                key: 'EchoAdmin',
+                shortName: 'EchoAdmin',
+                fileUri: adminModulePath,
+                path: '/admin',
+                version: '1.0.0',
+                private: false,
                 requireRef
             }
         ];
@@ -53,7 +55,7 @@ export async function createEchoModuleManifest(currentPath?: string, requireRef?
     }
 }
 
-function getFilePath(filePath: string): string {
+function getFileUriPath(filePath: string): string {
     const arr = filePath.split('/');
     const fileName = arr[arr.length - 1];
     return `/${fileName}`;
