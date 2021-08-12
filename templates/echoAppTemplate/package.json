@@ -6,11 +6,11 @@
     "source": "src/index.ts",
     "scripts": {
         "build": "echo-build",
-        "start": "echo-build -s -d"
+        "start": "echo-build -s -d",
+        "start-admin": "echo-build -s -d -a"
     },
     "author": "",
     "license": "ISC",
-    "manifest": {},
     "peerDependencies": {
         "@equinor/echo-base": "^0.2.97",
         "@equinor/echo-components": " 0.0.12",

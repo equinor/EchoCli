@@ -1,15 +1,16 @@
 import fs, { PathLike } from 'fs';
 import { OutputOptions } from 'rollup';
 
-// interface EchoModuleCreator {
-//     name: string;
-//     writeBundle(options: OutputOptions, bundle: any): Promise<void>;
-// }
+interface EchoModuleCreator {
+    name: string;
+    writeBundle(options: OutputOptions, bundle: any): Promise<void>;
+}
 
-export default function echoModuleCreator(filepath: string, fileToChange: string, requireRef?: string) {
-    // const arr = fileToChange.split('/');
-    // const fileName = arr[arr.length - 1];
-    // console.log(fileName);
+export default function echoModuleCreator(
+    filepath: string,
+    fileToChange: string,
+    requireRef?: string
+): EchoModuleCreator {
     return {
         name: 'echo-moduleCreator',
         async writeBundle(options: OutputOptions, bundle): Promise<void> {

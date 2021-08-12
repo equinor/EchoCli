@@ -18,6 +18,10 @@ export default class CreateBundle extends Command {
             char: 'd',
             description: 'Production is default, add -d flag for development'
         }),
+        adminModule: flags.boolean({
+            char: 'a',
+            description: 'Add the administration module to the development with the -a flag'
+        }),
         type: flags.string({
             char: 't',
             description: 'Type of bundling configuration, webpack | rollup',

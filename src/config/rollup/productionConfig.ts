@@ -1,8 +1,8 @@
 import { Plugin } from 'rollup';
 import cleanup from 'rollup-plugin-cleanup';
-import { EchoBundleOptions } from '../tools/build/build';
+import { EchoRollupOptions } from '../common/initOptions';
 
-export function productionConfig({ isProduction }: Partial<EchoBundleOptions>): Plugin[] {
+export function productionConfig({ isProduction }: Partial<EchoRollupOptions>): Plugin[] {
     if (isProduction) {
         return [
             cleanup({

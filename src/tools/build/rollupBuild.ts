@@ -67,13 +67,21 @@ export async function echoRollupBuild(
         },
         {
             task: async (): Promise<void> => {
-                await createEchoModuleManifest(options.currentDir, options.requireRef);
+                await createEchoModuleManifest(
+                    options.echoModuleConfig,
+                    options.currentDir,
+                    options.requireRef,
+                    options.adminModulePath,
+                    options.adminModule
+                );
             },
             title: 'Create Echo Manifest'
         }
     ]);
 
-    console.log(`Creating ${chalk.cyan('module')} configuration for ${chalk.green.bold(options.name)}`);
+    console.log(
+        `Creating ${chalk.cyan('module')} configuration for ${chalk.green.bold(options.echoModuleConfig.manifest.name)}`
+    );
 
     await tasks.run();
 
