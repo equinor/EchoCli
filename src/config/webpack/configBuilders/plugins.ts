@@ -29,7 +29,7 @@ function defineHtmlWebPackPlugin(): HtmlWebPackPlugin {
 // Custom bundling stats.
 function progressReport(): WebpackBar {
     return new WebpackBar({
-        name: 'XLD',
+        name: 'Echo module',
         color: '#007079',
         profile: true
     });
@@ -46,7 +46,7 @@ const analyzer = new BundleAnalyzerPlugin({
  * @returns {WebpackPlugin[]}
  */
 function defineBasePlugins(): WebpackPlugin[] {
-    return [defineHtmlWebPackPlugin(), progressReport(), cleanWebpackPlugin];
+    return [progressReport(), cleanWebpackPlugin];
 }
 
 /**
@@ -58,7 +58,7 @@ export function definePlugins(envPath: string): WebpackPlugin[] {
     return [
         ...defineBasePlugins(),
         hotModuleReplacement,
-        fastRefresh,
+        // fastRefresh,
         new Dotenv({
             ignoreStub: false,
             expand: true,

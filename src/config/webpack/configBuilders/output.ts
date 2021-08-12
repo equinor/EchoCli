@@ -4,15 +4,19 @@ import { EchoWebpackOptions } from '../../common/initOptions';
 export interface WebpackOutputOptions {
     path: string;
     filename: string;
-    chunkFilename: string;
-    publicPath: string;
+    // chunkFilename: string;
+    // publicPath: string;
+    libraryTarget: string;
+    library: string;
 }
 
 export function defineOutput(options: EchoWebpackOptions): WebpackOutputOptions {
     return {
-        path: path.resolve(__dirname, 'build'),
+        path: path.join(options.currentDir, 'build'),
         filename: `${options.shortName}.echo.bundle.js`,
-        chunkFilename: `assets/${options.shortName}.[contenthash].chunk.js`,
-        publicPath: '/'
+        library: options.shortName,
+        libraryTarget: 'umd'
+        // chunkFilename: `assets/${options.shortName}.[name].[contenthash].chunk.js`,
+        // publicPath: '/'
     };
 }

@@ -2,7 +2,7 @@ import { getSrcFilePath } from '../../common/getCurrentIndexFile';
 
 export interface EntryOptions {
     currentDir: string;
-    main: string;
+    source: string;
 }
 
 /**
@@ -12,6 +12,6 @@ export interface EntryOptions {
  * @param {EntryOptions} { currentDir, main } current project directory and main from package.json
  * @return {*}  {string[]}
  */
-export function defineEntry({ currentDir, main }: EntryOptions): string[] {
-    return ['babel-polyfill', 'react-hot-loader/patch', getSrcFilePath(currentDir, main)];
+export function defineEntry({ currentDir, source }: EntryOptions): string {
+    return getSrcFilePath(currentDir, source);
 }

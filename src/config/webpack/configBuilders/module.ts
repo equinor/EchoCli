@@ -22,13 +22,13 @@ function defineTsLoader(): RuleSetRule {
  */
 function defineTranspiler(): RuleSetRule {
     return {
-        test: /\.(js|jsx|tsx|ts)$/,
+        test: /\.(js|jsx)$/,
         exclude: [/node_modules/, /build/, '/public/'],
         use: {
-            loader: 'babel-loader',
-            options: {
-                plugins: [require.resolve('react-refresh/babel')].filter(Boolean)
-            }
+            loader: 'babel-loader'
+            // options: {
+            //     plugins: [require.resolve('react-refresh/babel')].filter(Boolean)
+            // }
         }
     };
 }
@@ -198,6 +198,6 @@ export function defineModule(): ModuleOptions {
     const worker = defineWorkers();
 
     return {
-        rules: [tsLoader, transpiler, markup, fonts, images, svg, moduleCSS, globalCSS, icons, worker]
+        rules: [tsLoader, transpiler, moduleCSS, globalCSS, worker]
     };
 }
