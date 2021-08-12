@@ -4,6 +4,7 @@ import Listr from 'listr';
 import path from 'path';
 import { projectInstall } from 'pkg-install';
 import { promisify } from 'util';
+import { createEchoModuleConfig } from '../../config/common/echoModuleConfig';
 import { TemplateDir } from '../../types/createTypes';
 import { copyTemplateFiles } from './copyFile';
 import { createAndSetTargetDir } from './createSetTargetDirectory';
@@ -37,7 +38,10 @@ export async function createProject(options: TemplateDir): Promise<boolean> {
             title: 'Initialize git'
         },
         {
-            task: (): Promise<void> => updatePackageConfig(options),
+            task: async (): Promise<void> => {
+                await updatePackageConfig(options);
+                await createEchoModuleConfig(options);
+            },
             title: 'Update package config'
         },
         {
