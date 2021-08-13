@@ -25,7 +25,8 @@
     "echo-create": "./lib/echo-create.js",
     "echo-run": "./lib/echo-run.js",
     "echo-build": "./lib/echo-build.js",
-    "echo-manifest": "./lib/echo-manifest.js"
+    "echo-manifest": "./lib/echo-manifest.js",
+    "echo-publish-module": "./lib/echo-publish.js"
   },
   "files": [
     "lib",
@@ -67,6 +68,7 @@
     "@rollup/plugin-url": "^6.0.0",
     "@svgr/rollup": "^5.5.0",
     "autoprefixer": "^10.2.5",
+    "axios": "^0.21.1",
     "babel-loader": "^8.2.2",
     "babel-polyfill": "^6.26.0",
     "chalk": "^4.1.0",
