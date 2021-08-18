@@ -1,5 +1,3 @@
-import path from 'path';
-
 export interface DevServerOptions {
     host: string;
     port: number;
@@ -25,13 +23,18 @@ const defaultOptions = {
  * @param - Additional options (https://webpack.js.org/configuration/dev-server/)
  * @returns {WebpackDevServerOptions} A settings object.
  */
-export function defineDevServer(options: DevServerOptions = defaultOptions): Record<string, any> {
+export function defineDevServer(
+    // current: string,
+    // root: string,
+    options: DevServerOptions = defaultOptions
+): Record<string, any> {
     return {
         ...options,
         http2: true,
         hot: true,
         historyApiFallback: true,
-        stats: 'errors-only',
-        contentBase: [path.join(__dirname, 'build'), path.join(__dirname, 'public')]
+        stats: 'errors-only'
+
+        // contentBase: [`${current}\\build`, root]
     };
 }

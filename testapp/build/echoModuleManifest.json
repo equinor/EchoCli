@@ -1,0 +1,12 @@
+[
+    {
+        "name": "testapp",
+        "key": "testapp",
+        "shortName": "testapp",
+        "fileUri": "/index.js",
+        "path": "/testapp",
+        "version": "0.0.1",
+        "private": false,
+        "requireRef": "echoDepLoader"
+    }
+]

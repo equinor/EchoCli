@@ -37,8 +37,11 @@ export async function createEchoModuleManifest(
                 version: pkj.version,
                 private: echoModuleConfig.manifest.private,
                 requireRef
-            },
-            adminModule && {
+            }
+        ];
+        adminModule === true &&
+            adminModulePath &&
+            newEchoModuleManifest.push({
                 name: 'Echo Administration',
                 key: 'EchoAdmin',
                 shortName: 'EchoAdmin',
@@ -47,8 +50,7 @@ export async function createEchoModuleManifest(
                 version: '1.0.0',
                 private: false,
                 requireRef
-            }
-        ];
+            });
         fs.writeFileSync(filePath, JSON.stringify(newEchoModuleManifest, null, 4));
     } catch (error) {
         console.error(error);

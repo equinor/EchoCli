@@ -14,7 +14,7 @@ export function defineOutput(options: EchoWebpackOptions): WebpackOutputOptions 
     const shortName = options.echoModuleConfig.manifest.shortName;
     return {
         path: path.join(options.currentDir, 'build'),
-        filename: `${shortName}.echo.bundle.js`,
+        filename: 'index.js', //`${shortName}.echo.bundle.js`,
         library: shortName,
         libraryTarget: 'umd'
         // chunkFilename: `assets/${options.shortName}.[name].[contenthash].chunk.js`,

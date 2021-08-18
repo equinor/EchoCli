@@ -1,9 +1,9 @@
 import path from 'path';
 import { OutputOptions, RollupOptions } from 'rollup';
 import { Configuration } from 'webpack';
-import { REQUIRED_REF } from '../../const/common';
-import getFilePath from '../../utils/getFilePath';
-import { EchoModuleConfig, getEchoModuleConfig } from './echoModuleConfig';
+import { ECHO_MODULE_CONFIG_PATH, REQUIRED_REF } from '../../const/common';
+import { getFile } from '../../utils/getFile';
+import { EchoModuleConfig } from './echoModuleConfig';
 import getPackageJson from './getPackageJson';
 import { Https } from './https';
 
@@ -40,8 +40,9 @@ export async function defineInitOptions(
     isDevelopment?: boolean
 ): Promise<Partial<EchoWebpackOptions | EchoRollupOptions>> {
     const currentDir = process.cwd();
-    const echoModuleConfig: EchoModuleConfig = await getEchoModuleConfig(currentDir);
+    const echoModuleConfig: EchoModuleConfig = await getFile<EchoModuleConfig>(currentDir, ECHO_MODULE_CONFIG_PATH);
     const pkj = await getPackageJson(currentDir);
+
     return {
         ...echoBundleOptions,
         isProduction: isDevelopment ? false : true,
@@ -54,7 +55,7 @@ export async function defineInitOptions(
         wwwRoot: path.resolve(__dirname, '../../../', 'client'),
         adminModulePath: path.resolve(__dirname, '../../../', 'admin'),
         requireRef: REQUIRED_REF,
-        envPath: await getFilePath(currentDir, './.env'),
+        // envPath: await getFilePath(currentDir, '/.env'),
         echoModuleConfig
     };
 }

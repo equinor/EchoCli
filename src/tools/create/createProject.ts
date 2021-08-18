@@ -5,6 +5,7 @@ import path from 'path';
 import { projectInstall } from 'pkg-install';
 import { promisify } from 'util';
 import { createEchoModuleConfig } from '../../config/common/echoModuleConfig';
+import { createEchoModuleId } from '../../config/common/echoModuleId';
 import { TemplateDir } from '../../types/createTypes';
 import { copyTemplateFiles } from './copyFile';
 import { createAndSetTargetDir } from './createSetTargetDirectory';
@@ -40,9 +41,20 @@ export async function createProject(options: TemplateDir): Promise<boolean> {
         {
             task: async (): Promise<void> => {
                 await updatePackageConfig(options);
-                await createEchoModuleConfig(options);
             },
             title: 'Update package config'
+        },
+        {
+            task: async (): Promise<void> => {
+                await createEchoModuleConfig(options);
+            },
+            title: 'Create echo config'
+        },
+        {
+            task: async (): Promise<void> => {
+                await createEchoModuleId(options);
+            },
+            title: 'Create echo Id File'
         },
         {
             task: (): Promise<void> => updateReadme(options),

@@ -2,14 +2,15 @@ import ReactRefreshWebpackPlugin from '@pmmmwh/react-refresh-webpack-plugin';
 import { CleanWebpackPlugin } from 'clean-webpack-plugin';
 import Dotenv from 'dotenv-webpack';
 import HtmlWebPackPlugin from 'html-webpack-plugin';
-import { Compiler, HotModuleReplacementPlugin, WebpackPluginInstance } from 'webpack';
+import { Compiler, WebpackPluginInstance } from 'webpack';
 import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
 import WebpackBar from 'webpackbar';
+import { echoWebpackModulePlugin } from '../echoWebpackModule';
 
 type WebpackPlugin = ((this: Compiler, compiler: Compiler) => void) | WebpackPluginInstance;
 
 const fastRefresh = new ReactRefreshWebpackPlugin();
-const hotModuleReplacement = new HotModuleReplacementPlugin();
+// const hotModuleReplacement = new HotModuleReplacementPlugin();
 
 /**
  * More info can be found here:
@@ -46,7 +47,7 @@ const analyzer = new BundleAnalyzerPlugin({
  * @returns {WebpackPlugin[]}
  */
 function defineBasePlugins(): WebpackPlugin[] {
-    return [progressReport(), cleanWebpackPlugin];
+    return [progressReport()];
 }
 
 /**
@@ -54,16 +55,17 @@ function defineBasePlugins(): WebpackPlugin[] {
  * @param {"dev"|"remote"} env
  * @returns {WebpackPlugin[]}
  */
-export function definePlugins(envPath: string): WebpackPlugin[] {
+export function definePlugins(envPath: string, requireRef: string): WebpackPlugin[] {
     return [
         ...defineBasePlugins(),
-        hotModuleReplacement,
+        // hotModuleReplacement,
         // fastRefresh,
         new Dotenv({
             ignoreStub: false,
             expand: true,
             systemvars: false,
             path: envPath
-        })
+        }),
+        echoWebpackModulePlugin(requireRef)
     ];
 }

@@ -5,7 +5,7 @@ import { promisify } from 'util';
 
 const access = promisify(fs.access);
 
-export default async function getFilePath(fileName: string, currentDir: string): Promise<string> {
+export default async function getFilePath(currentDir: string, fileName: string): Promise<string> {
     const currentPath = path.join(currentDir, `${fileName}`);
 
     try {
