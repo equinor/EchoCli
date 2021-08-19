@@ -1,8 +1,0 @@
-{
-  "version": "v1",
-  "packages": {
-    "@equinor/echo-cli": {
-      "signature": "bb4bdd7d47f2c6c9540438cdccfabe18"
-    }
-  }
-}
