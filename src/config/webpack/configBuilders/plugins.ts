@@ -1,29 +1,19 @@
-import ReactRefreshWebpackPlugin from '@pmmmwh/react-refresh-webpack-plugin';
 import { CleanWebpackPlugin } from 'clean-webpack-plugin';
 import Dotenv from 'dotenv-webpack';
-import HtmlWebPackPlugin from 'html-webpack-plugin';
-import { Compiler, WebpackPluginInstance } from 'webpack';
-import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
+import NodePolyfillPlugin from 'node-polyfill-webpack-plugin';
+import { Compiler, HotModuleReplacementPlugin, WebpackPluginInstance } from 'webpack';
 import WebpackBar from 'webpackbar';
 import { echoWebpackModulePlugin } from '../echoWebpackModule';
 
 type WebpackPlugin = ((this: Compiler, compiler: Compiler) => void) | WebpackPluginInstance;
 
-const fastRefresh = new ReactRefreshWebpackPlugin();
-// const hotModuleReplacement = new HotModuleReplacementPlugin();
-
 /**
  * More info can be found here:
  * https://www.npmjs.com/package/clean-webpack-plugin
  * @type {*} CleanWebpackPlugin */
-const cleanWebpackPlugin = new CleanWebpackPlugin();
-
-function defineHtmlWebPackPlugin(): HtmlWebPackPlugin {
-    return new HtmlWebPackPlugin({
-        template: './public/template/index.html',
-        filename: './index.html',
-        favicon: './public/template/favicon.ico',
-        inject: true
+function cleanWebpackPlugin(): CleanWebpackPlugin {
+    return new CleanWebpackPlugin({
+        cleanOnceBeforeBuildPatterns: ['!echoModuleManifest.json', '**/*.js', '**/*hot-update.json', '**/*.map']
     });
 }
 
@@ -36,18 +26,12 @@ function progressReport(): WebpackBar {
     });
 }
 
-const analyzer = new BundleAnalyzerPlugin({
-    analyzerMode: 'server',
-    analyzerPort: 3001,
-    openAnalyzer: true
-});
-
 /**
  * Export all plugins which are used in all environments.
  * @returns {WebpackPlugin[]}
  */
 function defineBasePlugins(): WebpackPlugin[] {
-    return [progressReport()];
+    return [cleanWebpackPlugin(), progressReport()];
 }
 
 /**
@@ -55,17 +39,19 @@ function defineBasePlugins(): WebpackPlugin[] {
  * @param {"dev"|"remote"} env
  * @returns {WebpackPlugin[]}
  */
-export function definePlugins(envPath: string, requireRef: string): WebpackPlugin[] {
+export function definePlugins(envPath: string, isProduction: boolean): WebpackPlugin[] {
     return [
         ...defineBasePlugins(),
-        // hotModuleReplacement,
-        // fastRefresh,
+        new NodePolyfillPlugin(),
+        new HotModuleReplacementPlugin(),
+        // new ReactRefreshWebpackPlugin(),
         new Dotenv({
             ignoreStub: false,
             expand: true,
             systemvars: false,
             path: envPath
         }),
-        echoWebpackModulePlugin(requireRef)
+        // new NoEmitOnErrorsPlugin(),
+        echoWebpackModulePlugin(isProduction)
     ];
 }

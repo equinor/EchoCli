@@ -1,3 +1,4 @@
+import updateEchoPackages from '@equinor/echo-update';
 import chalk from 'chalk';
 import * as fs from 'fs';
 import Listr from 'listr';
@@ -41,6 +42,7 @@ export async function createProject(options: TemplateDir): Promise<boolean> {
         {
             task: async (): Promise<void> => {
                 await updatePackageConfig(options);
+                await updateEchoPackages(options.targetDirectory || '', false);
             },
             title: 'Update package config'
         },

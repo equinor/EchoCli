@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 import Listr from 'listr';
-import { webpack } from 'webpack';
+import webpack from 'webpack';
 import { createEchoModuleManifest } from '../../config/common/echoManifest';
 import { defineHttps } from '../../config/common/https';
 import { defineInitOptions, EchoBundleOptions, EchoWebpackOptions } from '../../config/common/initOptions';
@@ -67,38 +67,8 @@ class CompileError extends Error {
 async function runBuild(options: EchoWebpackOptions): Promise<void> {
     return new Promise<void>(async (resolve, reject) => {
         if (options.serve) {
-            // task.title = 'watching started!';
             const compiler = webpack(options.config);
             devServer(compiler, options);
-            // const watching = compiler.watch(
-            //     {
-            //         // Example [watchOptions](/configuration/watch/#watchoptions)
-            //         aggregateTimeout: 300,
-            //         poll: undefined
-            //     },
-            //     (err, stats) => {
-            //         // [Stats Object](#stats-object)
-            //         // Print watch/build result here...
-            //         // console.log(stats);
-            //     }
-            // );
-
-            // try {
-            //     const serverOptions = defineDevServer(options.currentDir, options.wwwRoot);
-            //     const server = new WebpackDevServer(compiler, serverOptions);
-            //     server.listen(8080, '127.0.0.1', () => {
-            //         console.log('Starting server on https://localhost:8080');
-            //     });
-            // } catch (error) {
-            //     console.warn(error);
-            // }
-
-            // watching.close((error?: Error) => {
-            //     if (error) {
-            //         console.error(error);
-            //     }
-            //     console.error('Watching Ended.');
-            // });
         } else {
             const compiler = webpack(options.config);
             compiler.run((error, stats) => {

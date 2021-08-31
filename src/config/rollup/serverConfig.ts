@@ -9,16 +9,19 @@ export function serverConfig(options: Partial<EchoRollupOptions>): Plugin[] {
         return [
             serve({
                 contentBase: [`${options.currentDir}/${contentBase}`, options.wwwRoot],
-                port: port,
+                port,
                 verbose: true,
-                open: open,
+                open,
                 https: options.https,
                 host: host,
                 historyApiFallback: true
             }),
 
             livereload({
-                https: options.https
+                watch: `${options.currentDir}/${contentBase}`
+                // verbose: true,
+                // port,
+                // https: options.https
             })
         ];
     }

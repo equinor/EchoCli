@@ -12,6 +12,6 @@ export interface EntryOptions {
  * @param {EntryOptions} { currentDir, main } current project directory and main from package.json
  * @return {*}  {string[]}
  */
-export function defineEntry({ currentDir, source }: EntryOptions): string {
-    return getSrcFilePath(currentDir, source);
+export function defineEntry({ currentDir, source }: EntryOptions): string[] {
+    return ['webpack-hot-middleware/client?path=/__webpack_hmr&timeout=20000', getSrcFilePath(currentDir, source)];
 }

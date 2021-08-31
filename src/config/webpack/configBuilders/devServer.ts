@@ -1,21 +1,11 @@
-export interface DevServerOptions {
-    host: string;
-    port: number;
-    disableHostCheck: boolean;
-}
-
-export interface WebpackDevServerOptions extends DevServerOptions {
-    http2: boolean;
-    hot: boolean;
-    historyApiFallback: boolean;
-    stats: string;
-    contentBase: string[];
-}
+import path from "path";
+import WebpackDevServer from "webpack-dev-server";
 
 const defaultOptions = {
-    host: 'localhost',
-    port: 3000,
-    disableHostCheck: true
+
+    // disableHostCheck: true,
+    http2: true,
+    writeToDisk: true,
 };
 
 /**
@@ -24,17 +14,22 @@ const defaultOptions = {
  * @returns {WebpackDevServerOptions} A settings object.
  */
 export function defineDevServer(
-    // current: string,
-    // root: string,
-    options: DevServerOptions = defaultOptions
-): Record<string, any> {
+    current: string,
+    root: string,
+): WebpackDevServer.Configuration {
+    const publicPath=  path.join(current, 'build');
     return {
-        ...options,
-        http2: true,
+        ...defaultOptions,
+        contentBase: [publicPath, root],
+        publicPath,
+        host: 'localhost',
+        port: 3000,
+        stats: "errors-only",
+        liveReload: true,
         hot: true,
         historyApiFallback: true,
-        stats: 'errors-only'
-
-        // contentBase: [`${current}\\build`, root]
+        injectHot: true,
+        open: true, 
+        watchContentBase: true,
     };
 }

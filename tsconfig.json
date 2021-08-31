@@ -1,25 +1,23 @@
-
 {
-  "include": ["src/**/*"],
-  "compilerOptions": {                               
-    "module": "CommonJS",
-    "esModuleInterop": true,
-    "declaration": true,
-    "noImplicitAny": false,
-    "removeComments": false,
-    "noLib": false,
-    "moduleResolution": "node",
-    "forceConsistentCasingInFileNames": true,
-    "allowSyntheticDefaultImports": true,
-    "emitDecoratorMetadata": true,
-    "experimentalDecorators": true,
-    "skipLibCheck": true,
-    "sourceMap": true,
-    "lib": ["es6", "dom", "esnext"],           
-    "strict": true,
-    "rootDir": "./src",   
-    "outDir": "lib",                                                                        
-    "target": "ES6",
-  }
+    "include": ["src/**/*"],
+    "compilerOptions": {
+        "module": "CommonJS",
+        "esModuleInterop": true,
+        "declaration": true,
+        "noImplicitAny": false,
+        "removeComments": false,
+        "noLib": false,
+        "moduleResolution": "node",
+        "forceConsistentCasingInFileNames": true,
+        "allowSyntheticDefaultImports": true,
+        "emitDecoratorMetadata": true,
+        "experimentalDecorators": true,
+        "skipLibCheck": true,
+        "sourceMap": true,
+        "lib": ["es6", "dom", "esnext"],
+        "strict": true,
+        "rootDir": "./src",
+        "outDir": "lib",
+        "target": "ES6"
+    }
 }
-

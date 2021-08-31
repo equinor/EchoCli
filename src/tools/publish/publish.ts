@@ -16,7 +16,16 @@ export async function sendGetRequest(): Promise<void> {
     axios
         .post(
             url,
-            { test: 'Hello Ove from Echo CLI!' },
+            {
+                name: 'myapp',
+                key: 'myapp',
+                shortName: 'myapp',
+                fileUri: '/index.js',
+                path: '/myapp',
+                version: '0.0.1',
+                private: false,
+                requireRef: 'echoDepLoader'
+            },
             {
                 httpsAgent
             }

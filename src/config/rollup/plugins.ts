@@ -6,7 +6,6 @@ import url from '@rollup/plugin-url';
 import svgr from '@svgr/rollup';
 import autoprefixer from 'autoprefixer';
 import { Plugin } from 'rollup';
-import del from 'rollup-plugin-delete';
 import nodePolyfills from 'rollup-plugin-node-polyfills';
 import postcss from 'rollup-plugin-postcss';
 import typescript2 from 'rollup-plugin-typescript2';
@@ -18,12 +17,12 @@ import { productionConfig } from './productionConfig';
 import { serverConfig } from './serverConfig';
 
 export function getBuildPlugging(options: Partial<EchoRollupOptions>): Plugin[] {
-    return merge(initialConfig(options), productionConfig(options), serverConfig(options));
+    return merge(initialConfig(), productionConfig(options), serverConfig(options));
 }
 
-export function initialConfig(options: Partial<EchoRollupOptions>): Plugin[] {
+export function initialConfig(): Plugin[] {
     return [
-        del({ targets: `${options.currentDir}/lib/*`, runOnce: true }),
+        // del({ targets: `${options.currentDir}/lib/*`, runOnce: true }),
         nodePolyfills({
             fs: true
         }),

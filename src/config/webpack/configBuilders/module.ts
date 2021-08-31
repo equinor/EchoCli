@@ -97,7 +97,6 @@ function defineModuleCSS(): RuleSetRule {
 function defineImages(): RuleSetRule {
     return {
         test: /\.(png|jpg|gif|jpeg)$/,
-        // include: [],
         use: [
             {
                 loader: 'file-loader',
@@ -136,7 +135,6 @@ function defineIcons(): RuleSetRule {
 function defineFonts(): RuleSetRule {
     return {
         test: /.(ttf|otf|eot|svg|woff(2)?)(\?[a-z0-9]+)?$/,
-        // include: [],
         use: [
             {
                 loader: 'file-loader',

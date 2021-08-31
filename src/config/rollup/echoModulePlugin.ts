@@ -6,11 +6,7 @@ interface EchoModuleCreator {
     writeBundle(options: OutputOptions, bundle: any): Promise<void>;
 }
 
-export default function echoModuleCreator(
-    filepath: string,
-    fileToChange: string,
-    requireRef?: string
-): EchoModuleCreator {
+export default function echoModuleCreator(filepath: string, fileToChange: string, requireRef?: string) {
     return {
         name: 'echo-moduleCreator',
         async writeBundle(options: OutputOptions, bundle): Promise<void> {

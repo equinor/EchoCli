@@ -12,7 +12,6 @@ export default class CreateBundle extends Command {
     public static description = 'Creates Echo Bundle';
 
     public static flags = {
-        watch: flags.boolean({ char: 'w', description: 'Add the watch option' }),
         serve: flags.boolean({
             char: 's',
             description: 'Add the serve Echo Client with app'

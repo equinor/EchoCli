@@ -9,19 +9,24 @@ import { definePlugins } from './configBuilders/plugins';
 
 export async function defineWebpackConfig(options: EchoWebpackOptions): Promise<Configuration> {
     const peerDependencies = Object.keys(options.peerDependencies ?? {});
+    const mode = options.isProduction ? 'production' : 'development';
+    console.log('Webpack Mode', mode);
 
     return {
         entry: defineEntry(options),
-        // mode: options.isProduction ? 'production' : 'development',
-        mode: 'production',
-        devtool: 'source-map',
+        mode,
+        context: options.currentDir,
+        devtool: !options.isProduction && 'source-map',
         externals: [...peerDependencies],
         output: defineOutput(options),
         resolve: {
             extensions
         },
+        devServer: {
+            hot: true
+        },
         module: defineModule(),
-        plugins: definePlugins(options.envPath, options.requireRef),
-        optimization: defineOptimizations()
+        plugins: definePlugins(options.envPath, options.isProduction),
+        optimization: defineOptimizations(options.isProduction)
     };
 }

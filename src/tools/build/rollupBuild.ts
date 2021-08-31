@@ -49,18 +49,6 @@ export async function echoRollupBuild(
     const tasks = new Listr([
         {
             task: async (): Promise<void> => {
-                options.inputOptions = await defineRollupInputOptions(options);
-            },
-            title: 'Generate Input Options'
-        },
-        {
-            task: async (): Promise<void> => {
-                options.outputOptions = await defineRollupOutputOptions(options);
-            },
-            title: 'Generate Output Options'
-        },
-        {
-            task: async (): Promise<void> => {
                 options.https = await defineHttps();
             },
             title: 'Get SSL Certificate'
@@ -76,6 +64,13 @@ export async function echoRollupBuild(
                 );
             },
             title: 'Create Echo Manifest'
+        },
+        {
+            task: async (): Promise<void> => {
+                options.inputOptions = await defineRollupInputOptions(options);
+                options.outputOptions = await defineRollupOutputOptions(options);
+            },
+            title: 'Generate Options Rollup'
         }
     ]);
 
