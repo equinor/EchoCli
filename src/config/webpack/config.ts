@@ -19,6 +19,7 @@ export async function defineWebpackConfig(options: EchoWebpackOptions): Promise<
         devtool: !options.isProduction && 'source-map',
         externals: [...peerDependencies],
         output: defineOutput(options),
+        target: !options.isProduction && 'web',
         resolve: {
             extensions
         },
