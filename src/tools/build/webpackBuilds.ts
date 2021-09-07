@@ -2,7 +2,6 @@
 import Listr from 'listr';
 import webpack from 'webpack';
 import { createEchoModuleManifest } from '../../config/common/echoManifest';
-import { defineHttps } from '../../config/common/https';
 import { defineInitOptions, EchoBundleOptions, EchoWebpackOptions } from '../../config/common/initOptions';
 import { defineWebpackConfig } from '../../config/webpack/config';
 import { devServer } from '../../config/webpack/server';
@@ -23,12 +22,12 @@ export async function echoWebpackBuild(
             },
             title: 'Generate Webpack Config'
         },
-        {
-            task: async (): Promise<void> => {
-                options.https = await defineHttps();
-            },
-            title: 'Get SSL Certificate'
-        },
+        // {
+        //     task: async (): Promise<void> => {
+        //         options.https = await defineHttps();
+        //     },
+        //     title: 'Get SSL Certificate'
+        // },
         {
             task: async (): Promise<void> => {
                 await createEchoModuleManifest(
@@ -46,7 +45,7 @@ export async function echoWebpackBuild(
 
     try {
         runBuild(options);
-    } catch (e) {
+    } catch (e: any) {
         if (e.errors) {
             (e.errors as Error[]).forEach((e) => console.log(e.message));
         } else {

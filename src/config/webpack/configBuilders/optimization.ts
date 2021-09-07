@@ -6,7 +6,6 @@ import TerserPlugin from 'terser-webpack-plugin';
  * @returns {Optimization} Optimization
  */
 export function defineOptimizations(isProduction: boolean): Record<string, unknown> {
- 
     return isProduction
         ? {
               minimizer: [

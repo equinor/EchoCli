@@ -1,14 +1,12 @@
 import express from 'express';
-import path from 'path';
+import * as path from 'path';
 import WebpackDevServer from 'webpack-dev-server';
-import { Https } from '../../common/https';
-
 /**
  *  Defines options for the webpack dev server middleware.
  * @param - Additional options (https://webpack.js.org/configuration/dev-server/)
  * @returns {WebpackDevServerOptions} A settings object.
  */
-export function defineDevServer(current: string, root: string, https: Https): WebpackDevServer.Configuration {
+export function defineDevServer(current: string, root: string, modulePath: string): WebpackDevServer.Configuration {
     const publicPath = path.join(current, 'build');
     return {
         https: true,
@@ -30,7 +28,8 @@ export function defineDevServer(current: string, root: string, https: Https): We
         devMiddleware: {
             writeToDisk: true,
             publicPath,
-            index: true
+            index: true,
+            stats: 'errors-warnings'
         },
         onBeforeSetupMiddleware: (devServer) => {
             devServer.app.use('/', [express.static(root), express.static(publicPath)]);
@@ -39,19 +38,22 @@ export function defineDevServer(current: string, root: string, https: Https): We
             devServer.app.get('*', (req, res) => res.sendFile(root + '/index.html'));
         },
         client: {
-            webSocketURL: {
-                // Enable custom sockjs pathname for websocket connection to hot reloading server.
-                // Enable custom sockjs hostname, pathname and port for websocket connection
-                // to hot reloading server.
-                hostname: '0.0.0.0',
-                pathname: '/ws',
-                port: 3000
-            },
-            overlay: true,
-            logging: 'warn',
-            progress: true
+            // webSocketURL: {
+            //     // Enable custom sockjs pathname for websocket connection to hot reloading server.
+            //     // Enable custom sockjs hostname, pathname and port for websocket connection
+            //     // to hot reloading server.
+            //     hostname: '0.0.0.0',
+            //     pathname: '/ws',
+            //     port: 3000
+            // },
+            // overlay: {
+            //     errors: true,
+            //     warnings: false
+            // },
+            logging: 'none'
         },
         historyApiFallback: true,
-        open: true
+        open: ['/', modulePath],
+        compress: true
     };
 }

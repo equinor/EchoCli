@@ -10,7 +10,6 @@ import { definePlugins } from './configBuilders/plugins';
 export async function defineWebpackConfig(options: EchoWebpackOptions): Promise<Configuration> {
     const peerDependencies = Object.keys(options.peerDependencies ?? {});
     const mode = options.isProduction ? 'production' : 'development';
-    console.log('Webpack Mode', mode);
 
     return {
         entry: defineEntry(options),
@@ -22,12 +21,14 @@ export async function defineWebpackConfig(options: EchoWebpackOptions): Promise<
         resolve: {
             extensions
         },
-        devServer: {
-            hot: true
-        },
         target: 'web',
         module: defineModule(),
         plugins: definePlugins(options.envPath, options.isProduction),
-        optimization: defineOptimizations(options.isProduction)
+        optimization: defineOptimizations(options.isProduction),
+        infrastructureLogging: {
+            level: 'none',
+            debug: false,
+            appendOnly: true
+        }
     };
 }

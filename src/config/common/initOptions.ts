@@ -2,7 +2,7 @@ import path from 'path';
 import { OutputOptions, RollupOptions } from 'rollup';
 import { Configuration } from 'webpack';
 import { ECHO_MODULE_CONFIG_PATH, REQUIRED_REF } from '../../const/common';
-import { getFile } from '../../utils/getFile';
+import getFilePath, { getFile } from '../../utils/getFile';
 import { EchoModuleConfig } from './echoModuleConfig';
 import getPackageJson from './getPackageJson';
 import { Https } from './https';
@@ -55,7 +55,7 @@ export async function defineInitOptions(
         wwwRoot: path.resolve(__dirname, '../../../', 'client'),
         adminModulePath: path.resolve(__dirname, '../../../', 'admin'),
         requireRef: REQUIRED_REF,
-        // envPath: await getFilePath(currentDir, '/.env'),
+        envPath: await getFilePath(currentDir, '/.env'),
         echoModuleConfig
     };
 }

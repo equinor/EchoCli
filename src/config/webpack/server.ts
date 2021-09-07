@@ -4,7 +4,11 @@ import { EchoWebpackOptions } from '../common/initOptions';
 import { defineDevServer } from './configBuilders/devServer';
 
 export function devServer(compiler: Compiler, options: EchoWebpackOptions): void {
-    const devServerOptions = defineDevServer(options.currentDir, options.wwwRoot, options.https);
+    const devServerOptions = defineDevServer(
+        options.currentDir,
+        options.wwwRoot,
+        options.echoModuleConfig.manifest.path
+    );
     const server = new WebpackDevServer(devServerOptions, compiler);
 
     server.startCallback(() => {
