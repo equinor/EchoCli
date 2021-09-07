@@ -13,5 +13,6 @@ export interface EntryOptions {
  * @return {*}  {string[]}
  */
 export function defineEntry({ currentDir, source }: EntryOptions): string[] {
-    return ['webpack-hot-middleware/client?path=/__webpack_hmr&timeout=20000', getSrcFilePath(currentDir, source)];
+    return [getSrcFilePath(currentDir, source)];
 }
+//'webpack-hot-middleware/client?path=/__webpack_hmr&timeout=20000'

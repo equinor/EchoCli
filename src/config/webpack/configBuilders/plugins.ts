@@ -1,7 +1,7 @@
 import { CleanWebpackPlugin } from 'clean-webpack-plugin';
 import Dotenv from 'dotenv-webpack';
 import NodePolyfillPlugin from 'node-polyfill-webpack-plugin';
-import { Compiler, HotModuleReplacementPlugin, WebpackPluginInstance } from 'webpack';
+import { Compiler, WebpackPluginInstance } from 'webpack';
 import WebpackBar from 'webpackbar';
 import { echoWebpackModulePlugin } from '../echoWebpackModule';
 
@@ -31,7 +31,7 @@ function progressReport(): WebpackBar {
  * @returns {WebpackPlugin[]}
  */
 function defineBasePlugins(): WebpackPlugin[] {
-    return [cleanWebpackPlugin(), progressReport()];
+    return [cleanWebpackPlugin()];
 }
 
 /**
@@ -43,7 +43,7 @@ export function definePlugins(envPath: string, isProduction: boolean): WebpackPl
     return [
         ...defineBasePlugins(),
         new NodePolyfillPlugin(),
-        new HotModuleReplacementPlugin(),
+        // new HotModuleReplacementPlugin(),
         // new ReactRefreshWebpackPlugin(),
         new Dotenv({
             ignoreStub: false,

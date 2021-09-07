@@ -25,6 +25,7 @@ export async function defineWebpackConfig(options: EchoWebpackOptions): Promise<
         devServer: {
             hot: true
         },
+        target: 'web',
         module: defineModule(),
         plugins: definePlugins(options.envPath, options.isProduction),
         optimization: defineOptimizations(options.isProduction)
