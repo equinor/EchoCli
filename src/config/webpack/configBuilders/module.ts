@@ -196,6 +196,6 @@ export function defineModule(): ModuleOptions {
     const worker = defineWorkers();
 
     return {
-        rules: [tsLoader, transpiler, moduleCSS, globalCSS, worker]
+        rules: [tsLoader, transpiler, moduleCSS, globalCSS, worker, fonts, svg, icons, images]
     };
 }
