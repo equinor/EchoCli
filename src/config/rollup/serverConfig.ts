@@ -18,10 +18,10 @@ export function serverConfig(options: Partial<EchoRollupOptions>): Plugin[] {
             }),
 
             livereload({
-                watch: `${options.currentDir}/${contentBase}`
+                // watch: `${options.currentDir}/${contentBase}}`
                 // verbose: true,
                 // port,
-                // https: options.https
+                https: options.https
             })
         ];
     }
