@@ -8,7 +8,7 @@ export function serverConfig(options: Partial<EchoRollupOptions>): Plugin[] {
         const { contentBase, port, open, host } = options.echoModuleConfig.server;
         return [
             serve({
-                contentBase: [`${options.currentDir}/${contentBase}`, options.wwwRoot],
+                contentBase: [`${options.currentDir}${contentBase}`, options.wwwRoot],
                 port,
                 verbose: true,
                 open,
@@ -18,9 +18,7 @@ export function serverConfig(options: Partial<EchoRollupOptions>): Plugin[] {
             }),
 
             livereload({
-                // watch: `${options.currentDir}/${contentBase}}`
-                // verbose: true,
-                // port,
+                watch: `${options.currentDir}${contentBase}`,
                 https: options.https
             })
         ];
