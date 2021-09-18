@@ -7,12 +7,13 @@ export function devServer(compiler: Compiler, options: EchoWebpackOptions): void
     const devServerOptions = defineDevServer(
         options.currentDir,
         options.wwwRoot,
-        options.echoModuleConfig.manifest.path
+        options.echoModuleConfig.manifest.path,
+        options.echoModuleConfig
     );
     const server = new WebpackDevServer(devServerOptions, compiler);
 
     server.startCallback(() => {
-        console.log('Starting server on http://localhost:3000');
+        console.log(`Starting server on http://localhost:${options.echoModuleConfig.server.port}`);
     });
 
     // Custom

@@ -40,9 +40,8 @@ export function initialConfig(): Plugin[] {
         postcss({
             plugins: [autoprefixer()],
             sourceMap: false,
-            extract: false,
-            minimize: true,
-            modules: true
+            minimize: true
+            // modules: true
         }),
         url(),
         svgr(),

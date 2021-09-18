@@ -33,6 +33,7 @@ export interface EchoBundleOptions {
     adminModule?: boolean;
     adminModulePath: string;
     echoModuleConfig: EchoModuleConfig;
+    copy?: boolean;
 }
 
 export async function defineInitOptions(

@@ -23,6 +23,10 @@ export default class CreateBundle extends Command {
         adminModule: flags.boolean({
             char: 'a',
             description: 'Add the administration module to the development with the -a flag'
+        }),
+        copy: flags.boolean({
+            char: 'c',
+            description: 'will copy the client to the build folder'
         })
     };
 

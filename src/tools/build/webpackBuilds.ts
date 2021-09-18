@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 import Listr from 'listr';
 import webpack from 'webpack';
+import { copyClientFiles } from '../../config/common/copyFile';
 import { createEchoModuleManifest } from '../../config/common/echoManifest';
 import { defineInitOptions, EchoBundleOptions, EchoWebpackOptions } from '../../config/common/initOptions';
 import { defineWebpackConfig } from '../../config/webpack/config';
@@ -88,6 +89,9 @@ async function runBuild(options: EchoWebpackOptions): Promise<void> {
                     // console.log(
                     //     `Creating ${chalk.cyan('Webpack module')} configuration for ${chalk.green.bold(options.name)}`
                     // );
+                    if (options.copy) {
+                        copyClientFiles(options);
+                    }
                     console.log('Build Done!');
 
                     // console.log('%s Module ready!', chalk.green.bold('DONE'));

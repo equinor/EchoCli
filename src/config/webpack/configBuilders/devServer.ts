@@ -1,17 +1,24 @@
 import express from 'express';
 import * as path from 'path';
 import WebpackDevServer from 'webpack-dev-server';
+import { EchoModuleConfig } from '../../common/echoModuleConfig';
 /**
  *  Defines options for the webpack dev server middleware.
  * @param - Additional options (https://webpack.js.org/configuration/dev-server/)
  * @returns {WebpackDevServerOptions} A settings object.
  */
-export function defineDevServer(current: string, root: string, modulePath: string): WebpackDevServer.Configuration {
+export function defineDevServer(
+    current: string,
+    root: string,
+    modulePath: string,
+    echoModuleConfig: EchoModuleConfig
+): WebpackDevServer.Configuration {
     const publicPath = path.join(current, 'build');
+    const { port, host, open } = echoModuleConfig.server;
     return {
         https: true,
-        host: 'localhost',
-        port: 3000,
+        host,
+        port,
         static: [
             {
                 directory: root,
@@ -53,7 +60,7 @@ export function defineDevServer(current: string, root: string, modulePath: strin
             logging: 'none'
         },
         historyApiFallback: true,
-        open: ['/', modulePath],
+        open,
         compress: true
     };
 }
