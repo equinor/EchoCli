@@ -38,21 +38,13 @@ export function defineDevServer(
             index: true,
             stats: 'errors-warnings'
         },
-        onBeforeSetupMiddleware: (devServer) => {
+        onBeforeSetupMiddleware: (devServer): void => {
             devServer.app.use('/', [express.static(root), express.static(publicPath)]);
         },
-        onAfterSetupMiddleware: (devServer) => {
+        onAfterSetupMiddleware: (devServer): void => {
             devServer.app.get('*', (req, res) => res.sendFile(root + '/index.html'));
         },
         client: {
-            // webSocketURL: {
-            //     // Enable custom sockjs pathname for websocket connection to hot reloading server.
-            //     // Enable custom sockjs hostname, pathname and port for websocket connection
-            //     // to hot reloading server.
-            //     hostname: '0.0.0.0',
-            //     pathname: '/ws',
-            //     port: 3000
-            // },
             // overlay: {
             //     errors: true,
             //     warnings: false

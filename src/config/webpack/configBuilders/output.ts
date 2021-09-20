@@ -17,7 +17,7 @@ type LibraryTarget =
 export interface Output {
     path: string;
     filename: string;
-    chunkFilename: string;
+    // chunkFilename: string;
     // publicPath: string;
     libraryTarget: LibraryTarget;
     library: string;
@@ -31,8 +31,8 @@ export function defineOutput(options: EchoWebpackOptions): Output {
         path: path.join(options.currentDir, 'build'),
         filename: chunk ? `${shortName}-main.js` : getFileName(options.main), //`${shortName}.echo.bundle.js`,
         library: shortName,
-        libraryTarget: 'umd',
-        chunkFilename: `${shortName}.[name].[contenthash].chunk.js`
+        libraryTarget: 'umd'
+        // chunkFilename: `${shortName}.[name].[contenthash].chunk.js`
         // publicPath: '/'
     };
 }

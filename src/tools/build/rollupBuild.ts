@@ -2,6 +2,7 @@
 import chalk from 'chalk';
 import Listr from 'listr';
 import { rollup, RollupOptions, watch } from 'rollup';
+import { copyClientFiles } from '../../config/common/copyFile';
 import { createEchoModuleManifest } from '../../config/common/echoManifest';
 import { defineHttps } from '../../config/common/https';
 import { defineInitOptions, EchoBundleOptions, EchoRollupOptions } from '../../config/common/initOptions';
@@ -90,6 +91,10 @@ export async function echoRollupBuild(
         const bundle = await rollup(options.inputOptions as RollupOptions);
         await bundle.write(options.outputOptions as RollupOptions);
         bundle.close();
+
+        if (options.copy) {
+            copyClientFiles(options);
+        }
     } catch (error) {
         console.log(error);
     }
