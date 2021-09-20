@@ -4,6 +4,7 @@ import { TemplateDir } from '../../types/createTypes';
 
 export interface EchoModuleConfig {
     bundler: string;
+    chunk?: boolean;
     manifest: {
         name: string;
         key: string;

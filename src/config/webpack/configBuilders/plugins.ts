@@ -3,6 +3,7 @@ import Dotenv from 'dotenv-webpack';
 import NodePolyfillPlugin from 'node-polyfill-webpack-plugin';
 import { Compiler, WebpackPluginInstance } from 'webpack';
 import WebpackBar from 'webpackbar';
+import { EchoWebpackOptions } from '../../common/initOptions';
 import { echoWebpackModulePlugin } from '../echoWebpackModule';
 
 type WebpackPlugin = ((this: Compiler, compiler: Compiler) => void) | WebpackPluginInstance;
@@ -39,7 +40,8 @@ function defineBasePlugins(): WebpackPlugin[] {
  * @param {"dev"|"remote"} env
  * @returns {WebpackPlugin[]}
  */
-export function definePlugins(envPath: string, isProduction: boolean): WebpackPlugin[] {
+export function definePlugins(options: EchoWebpackOptions): WebpackPlugin[] {
+    const { envPath } = options;
     return [
         ...defineBasePlugins(),
         new NodePolyfillPlugin(),
@@ -52,6 +54,6 @@ export function definePlugins(envPath: string, isProduction: boolean): WebpackPl
             path: envPath
         }),
         // new NoEmitOnErrorsPlugin(),
-        echoWebpackModulePlugin(isProduction)
+        echoWebpackModulePlugin(options)
     ];
 }

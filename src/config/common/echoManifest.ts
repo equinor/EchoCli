@@ -32,7 +32,9 @@ export async function createEchoModuleManifest(
                 name: echoModuleConfig.manifest.name,
                 key: echoModuleConfig.manifest.key,
                 shortName: echoModuleConfig.manifest.shortName,
-                fileUri: getFileUriPath(pkj.main),
+                fileUri: echoModuleConfig.chunk
+                    ?`${echoModuleConfig.manifest.shortName}-main.js`: getFileUriPath(pkj.main),
+                    
                 path: echoModuleConfig.manifest.path,
                 version: pkj.version,
                 private: echoModuleConfig.manifest.private,
@@ -57,7 +59,7 @@ export async function createEchoModuleManifest(
     }
 }
 
-function getFileUriPath(filePath: string): string {
+export function getFileUriPath(filePath: string): string {
     const arr = filePath.split('/');
     const fileName = arr[arr.length - 1];
     return `/${fileName}`;

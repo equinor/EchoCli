@@ -23,7 +23,7 @@ export async function defineWebpackConfig(options: EchoWebpackOptions): Promise<
         },
         target: 'web',
         module: defineModule(),
-        plugins: definePlugins(options.envPath, options.isProduction),
+        plugins: definePlugins(options),
         optimization: defineOptimizations(options.isProduction),
         infrastructureLogging: {
             level: 'none',

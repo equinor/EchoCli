@@ -18,7 +18,10 @@ export function defineOptimizations(isProduction: boolean): Record<string, unkno
                           }
                       }
                   })
-              ]
+              ],
+              splitChunks: {
+                  chunks: 'all'
+              }
           }
         : {
               minimize: false
