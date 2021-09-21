@@ -26,7 +26,7 @@ export default class CreateBundle extends Command {
         }),
         copy: flags.boolean({
             char: 'c',
-            description: 'will copy the client to the build folder'
+            description: 'Will copy the client to the build folder'
         })
     };
 
@@ -35,7 +35,7 @@ export default class CreateBundle extends Command {
         const currentDir = process.cwd();
         const echoModuleConfig: EchoModuleConfig = await getFile<EchoModuleConfig>(currentDir, ECHO_MODULE_CONFIG_PATH);
         if (!echoModuleConfig.bundler) {
-            console.error('Please define the bundler option i your echoModule.config.json');
+            console.error('Please define the bundler option in your echoModule.config.json');
         }
         echoCliLogo();
 

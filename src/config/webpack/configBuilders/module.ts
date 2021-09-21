@@ -5,7 +5,7 @@ import { ModuleOptions, RuleSetRule } from 'webpack';
 
 /**
  *
- * Defines a rule set for ts-loader targeting ts ans tsx files,
+ * Defines a rule set for ts-loader targeting ts and tsx files,
  * @return {*}  {RuleSetRule} ts-loader rules
  */
 function defineTsLoader(): RuleSetRule {

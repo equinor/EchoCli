@@ -2,7 +2,6 @@ import { CleanWebpackPlugin } from 'clean-webpack-plugin';
 import Dotenv from 'dotenv-webpack';
 import NodePolyfillPlugin from 'node-polyfill-webpack-plugin';
 import { Compiler, WebpackPluginInstance } from 'webpack';
-import WebpackBar from 'webpackbar';
 import { EchoWebpackOptions } from '../../common/initOptions';
 import { echoWebpackModulePlugin } from '../echoWebpackModule';
 
@@ -15,15 +14,6 @@ type WebpackPlugin = ((this: Compiler, compiler: Compiler) => void) | WebpackPlu
 function cleanWebpackPlugin(): CleanWebpackPlugin {
     return new CleanWebpackPlugin({
         cleanOnceBeforeBuildPatterns: ['!echoModuleManifest.json', '**/*.js', '**/*hot-update.json', '**/*.map']
-    });
-}
-
-// Custom bundling stats.
-function progressReport(): WebpackBar {
-    return new WebpackBar({
-        name: 'Echo module',
-        color: '#007079',
-        profile: true
     });
 }
 
@@ -45,15 +35,12 @@ export function definePlugins(options: EchoWebpackOptions): WebpackPlugin[] {
     return [
         ...defineBasePlugins(),
         new NodePolyfillPlugin(),
-        // new HotModuleReplacementPlugin(),
-        // new ReactRefreshWebpackPlugin(),
         new Dotenv({
             ignoreStub: false,
             expand: true,
             systemvars: false,
             path: envPath
         }),
-        // new NoEmitOnErrorsPlugin(),
         echoWebpackModulePlugin(options)
     ];
 }
