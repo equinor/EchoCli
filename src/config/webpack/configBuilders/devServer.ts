@@ -14,7 +14,9 @@ export function defineDevServer(
     echoModuleConfig: EchoModuleConfig
 ): WebpackDevServer.Configuration {
     const publicPath = path.join(current, 'build');
-    const { port, host, open } = echoModuleConfig.server;
+    const { port, host, open, logging } = echoModuleConfig.server;
+    const { stats } = echoModuleConfig.devMiddleware;
+
     return {
         https: true,
         host,
@@ -27,7 +29,7 @@ export function defineDevServer(
             },
             {
                 directory: publicPath,
-                watch: true,
+                watch: true
             }
         ],
         hot: true,
@@ -36,7 +38,7 @@ export function defineDevServer(
             writeToDisk: true,
             publicPath,
             index: true,
-            stats: 'errors-warnings'
+            stats
         },
         onBeforeSetupMiddleware: (devServer): void => {
             devServer.app.use('/', [express.static(root), express.static(publicPath)]);
@@ -49,7 +51,7 @@ export function defineDevServer(
             //     errors: true,
             //     warnings: false
             // },
-            logging: 'none'
+            logging
         },
         historyApiFallback: true,
         open,

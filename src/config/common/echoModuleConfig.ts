@@ -18,6 +18,19 @@ export interface EchoModuleConfig {
         port: number;
         open: boolean;
         host: string;
+        logging: 'none' | 'verbose' | 'error' | 'log' | 'info' | 'warn';
+    };
+    devMiddleware: {
+        stats:
+            | boolean
+            | 'none'
+            | 'verbose'
+            | 'summary'
+            | 'errors-only'
+            | 'errors-warnings'
+            | 'minimal'
+            | 'normal'
+            | 'detailed';
     };
 }
 
@@ -39,7 +52,11 @@ export async function createEchoModuleConfig(options: TemplateDir): Promise<void
                 contentBase: '/build',
                 port: 3000,
                 open: true,
-                host: 'localhost'
+                host: 'localhost',
+                logging: 'none'
+            },
+            devMiddleware: {
+                stats: 'errors-warnings'
             }
         };
 
