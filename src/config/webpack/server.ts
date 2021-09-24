@@ -14,7 +14,7 @@ export function devServer(compiler: Compiler, options: EchoWebpackOptions): void
 
     server.startCallback(() => {
         console.log(
-            `Starting server on http://${options.echoModuleConfig.server.host}:${options.echoModuleConfig.server.port}`
+            `Starting server on https://${options.echoModuleConfig.server.host}:${options.echoModuleConfig.server.port}`
         );
     });
 }
