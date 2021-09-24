@@ -23,12 +23,6 @@ export async function echoWebpackBuild(
             },
             title: 'Generate Webpack Config'
         },
-        // {
-        //     task: async (): Promise<void> => {
-        //         options.https = await defineHttps();
-        //     },
-        //     title: 'Get SSL Certificate'
-        // },
         {
             task: async (): Promise<void> => {
                 await createEchoModuleManifest(
@@ -72,8 +66,6 @@ async function runBuild(options: EchoWebpackOptions): Promise<void> {
         } else {
             const compiler = webpack(options.config);
             compiler.run((error, stats) => {
-                // [Stats Object](#stats-object)
-                // ...
                 if (error) {
                     console.log('Build failed');
                     console.error('Run Error: ', error);
@@ -86,15 +78,10 @@ async function runBuild(options: EchoWebpackOptions): Promise<void> {
                 }
 
                 compiler.close(() => {
-                    // console.log(
-                    //     `Creating ${chalk.cyan('Webpack module')} configuration for ${chalk.green.bold(options.name)}`
-                    // );
                     if (options.copy) {
                         copyClientFiles(options);
                     }
                     console.log('Build Done!');
-
-                    // console.log('%s Module ready!', chalk.green.bold('DONE'));
                 });
             });
         }

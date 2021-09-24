@@ -1,4 +1,4 @@
-export interface CreatBase {
+export interface CreateBase {
     name: string;
     key: string;
     description: string;
@@ -9,16 +9,16 @@ export interface CreatBase {
     templateName: string;
 }
 
-export interface TemplateDir extends CreatBase {
+export interface TemplateDir extends CreateBase {
     targetDirectory?: string;
     templateDirectory?: string;
 }
 
-export type AppOptions = CreatBase;
+export type AppOptions = CreateBase;
 
-export type PluginOptions = CreatBase;
+export type PluginOptions = CreateBase;
 
-export type ModuleOptions = CreatBase;
+export type ModuleOptions = CreateBase;
 
 export interface Question {
     default?: string | boolean;

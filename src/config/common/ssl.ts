@@ -20,7 +20,7 @@ interface SSLManifest {
     days: number;
 }
 
-async function creatSslFiles(currentPath: string, days: number): Promise<Https> {
+async function createSslFiles(currentPath: string, days: number): Promise<Https> {
     try {
         const https: Https = await createHttps(days);
         const { keyPath, certificatePath, csrPath } = getCertPaths(currentPath);
@@ -79,10 +79,10 @@ export async function getHttps(currentPath: string, days: number): Promise<Https
         const sslManifestPath = path.join(currentPath || '', '/ssl/ssl.manifest.json');
         const sslManifest = JSON.parse(fs.readFileSync(sslManifestPath).toString());
 
-        if (!sslManifest.date) throw new Error('No SSl');
+        if (!sslManifest.date) throw new Error('No SSL');
 
         if (isSSLOutdated(sslManifest)) {
-            return await creatSslFiles(currentPath, days);
+            return await createSslFiles(currentPath, days);
         }
 
         const { keyPath, certificatePath, csrPath } = getCertPaths(currentPath);
@@ -96,6 +96,6 @@ export async function getHttps(currentPath: string, days: number): Promise<Https
             ca
         };
     } catch {
-        return await creatSslFiles(currentPath, days);
+        return await createSslFiles(currentPath, days);
     }
 }

@@ -34,9 +34,4 @@ async function getInitialOptions(initialOptions: EchoStartOptions): Promise<obje
     };
 
     return options;
-    // if (initialOptions.type === 'webpack') {
-    //     return options;
-    // } else {
-    //     return options;
-    // }
 }

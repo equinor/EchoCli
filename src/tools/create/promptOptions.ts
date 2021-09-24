@@ -8,7 +8,7 @@ export async function promptForMissingOptions(options: Partial<TemplateDir>): Pr
 
     if (!options.name || typeof options.name !== 'string') {
         nameQuestion.push({
-            message: 'Please enter a app name',
+            message: 'Please enter an app name',
             name: 'name',
             type: 'input'
         });
@@ -17,7 +17,7 @@ export async function promptForMissingOptions(options: Partial<TemplateDir>): Pr
     if (!options.key) {
         questions.push({
             default: selectedName && slugify(selectedName.name),
-            message: 'Please enter a app key',
+            message: 'Please enter an app key',
             name: 'key',
             type: 'input'
         });
@@ -25,7 +25,7 @@ export async function promptForMissingOptions(options: Partial<TemplateDir>): Pr
     if (!options.shortName) {
         questions.push({
             default: selectedName && cleanText(selectedName.name),
-            message: 'Please enter a app shortname',
+            message: 'Please enter an app shortname',
             name: 'shortName',
             type: 'input'
         });
@@ -33,7 +33,7 @@ export async function promptForMissingOptions(options: Partial<TemplateDir>): Pr
     if (!options.path) {
         questions.push({
             default: selectedName && `/${cleanText(selectedName.name)}`,
-            message: 'Please enter a app path',
+            message: 'Please enter an app path',
             name: 'path',
             type: 'input'
         });
@@ -41,7 +41,7 @@ export async function promptForMissingOptions(options: Partial<TemplateDir>): Pr
     if (!options.description) {
         questions.push({
             default: '',
-            message: 'Please enter a app description',
+            message: 'Please enter an app description',
             name: 'description',
             type: 'input'
         });
@@ -50,7 +50,7 @@ export async function promptForMissingOptions(options: Partial<TemplateDir>): Pr
     if (!options.templateName) {
         templateQuestion.push({
             default: 'app',
-            message: 'Please enter a app template (app | appTutorial)',
+            message: 'Please enter an app template (app | appTutorial)',
             name: 'template',
             type: 'input'
         });

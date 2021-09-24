@@ -10,7 +10,7 @@ export interface EntryOptions {
  *
  * @export
  * @param {EntryOptions} { currentDir, main } current project directory and main from package.json
- * @return {*}  {string[]}
+ * @return {*}  {string}
  */
 export function defineEntry({ currentDir, source }: EntryOptions): string {
     return getSrcFilePath(currentDir, source);
