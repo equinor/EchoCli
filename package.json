@@ -1,6 +1,6 @@
 {
     "name": "@equinor/echo-cli",
-    "version": "0.1.40",
+    "version": "0.1.42",
     "description": "Command line interface for Echo Apps",
     "main": "dist/index.js",
     "source": "src/test.js",
