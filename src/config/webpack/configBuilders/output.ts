@@ -24,7 +24,7 @@ export interface Output {
 }
 
 export function defineOutput(options: EchoWebpackOptions): Output {
-    const { manifest, chunk } = options.echoModuleConfig;
+    const { manifest, chunk, server } = options.echoModuleConfig;
 
     const shortName = manifest.shortName;
     return {
@@ -32,8 +32,8 @@ export function defineOutput(options: EchoWebpackOptions): Output {
         filename: chunk ? `${shortName}-main.js` : getFileName(options.main), //`${shortName}.echo.bundle.js`,
         library: shortName,
         libraryTarget: 'umd'
-        // chunkFilename: `${shortName}.[name].[contenthash].chunk.js`
-        // publicPath: '/'
+        // chunkFilename: `${shortName}.[contenthash].chunk.js`,
+        // publicPath: options.isProduction ? '/' : `https://${server.host}:${server.port}/`
     };
 }
 

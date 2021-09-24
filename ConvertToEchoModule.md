@@ -62,7 +62,7 @@ In the package.json fil we need to do some proper clanup. Lets start with the sc
 replace the above scripts with the following. build will just do a simple module build ready for echo inField. build-client will add the developer client to the build. this can be used if the module will be published on its own app instance.
 The start command wil build and serve the module trough the client provided form echo-cli.
 
-`PS: we are not ready to run any of there commands yet`
+`PS: we are not ready to run any of these commands yet`
 
 ```JSON
 {
@@ -106,7 +106,6 @@ optional packages are the following and should all be installed as devDependenci
 
 -   @equinor/echo-base
 -   @equinor/echo-components
--   @equinor/echo-core
 -   @equinor/echo-utils
 
 now lest add the peerDependencies. These are all the packages that the client will provide and will be striped from the bundled code.

@@ -27,7 +27,7 @@ export function defineDevServer(
             },
             {
                 directory: publicPath,
-                watch: true
+                watch: true,
             }
         ],
         hot: true,

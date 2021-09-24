@@ -13,7 +13,9 @@ export function devServer(compiler: Compiler, options: EchoWebpackOptions): void
     const server = new WebpackDevServer(devServerOptions, compiler);
 
     server.startCallback(() => {
-        console.log(`Starting server on http://localhost:${options.echoModuleConfig.server.port}`);
+        console.log(
+            `Starting server on http://${options.echoModuleConfig.server.host}:${options.echoModuleConfig.server.port}`
+        );
     });
 
     // Custom
