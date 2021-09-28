@@ -70,7 +70,7 @@
     "ncp": "^2.0.0",
     "pem": "^1.14.4",
     "pkg-install": "^1.0.0",
-    "postcss": "^8.3.0",
+    "postcss": "^8.3.6",
     "react": "17.0.1",
     "rollup": "^2.34.1",
     "rollup-plugin-cleanup": "^3.2.1",
