@@ -1,9 +1,12 @@
+import updateEchoPackages from '@equinor/echo-update';
 import chalk from 'chalk';
 import * as fs from 'fs';
 import Listr from 'listr';
 import path from 'path';
 import { projectInstall } from 'pkg-install';
 import { promisify } from 'util';
+import { createEchoModuleConfig } from '../../config/common/echoModuleConfig';
+import { createEchoModuleId } from '../../config/common/echoModuleId';
 import { TemplateDir } from '../../types/createTypes';
 import { copyTemplateFiles } from './copyFile';
 import { createAndSetTargetDir } from './createSetTargetDirectory';
@@ -37,8 +40,23 @@ export async function createProject(options: TemplateDir): Promise<boolean> {
             title: 'Initialize git'
         },
         {
-            task: (): Promise<void> => updatePackageConfig(options),
+            task: async (): Promise<void> => {
+                await updatePackageConfig(options);
+                await updateEchoPackages(options.targetDirectory || '', false);
+            },
             title: 'Update package config'
+        },
+        {
+            task: async (): Promise<void> => {
+                await createEchoModuleConfig(options);
+            },
+            title: 'Create echo config'
+        },
+        {
+            task: async (): Promise<void> => {
+                await createEchoModuleId(options);
+            },
+            title: 'Create echo Id File'
         },
         {
             task: (): Promise<void> => updateReadme(options),

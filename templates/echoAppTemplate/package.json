@@ -6,11 +6,11 @@
     "source": "src/index.ts",
     "scripts": {
         "build": "echo-build",
-        "start": "echo-build -s -d"
+        "start": "echo-build -s -d",
+        "start-admin": "echo-build -s -d -a"
     },
     "author": "",
     "license": "ISC",
-    "manifest": {},
     "peerDependencies": {
         "@equinor/echo-base": "^0.2.97",
         "@equinor/echo-components": " 0.0.12",
@@ -22,7 +22,7 @@
     },
     "devDependencies": {
         "@equinor/echo-base": "^0.2.97",
-        "@equinor/echo-cli": "^0.0.32",
+        "@equinor/echo-cli": "^0.1.4",
         "@equinor/echo-components": " 0.0.12",
         "@equinor/echo-core": "^0.2.99",
         "@equinor/echo-scripts": "0.1.5",

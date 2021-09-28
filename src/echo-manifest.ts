@@ -1,14 +1,15 @@
 #!/usr/bin/env node
 
 import Command from '@oclif/command';
-import { createEchoModuleManifest } from './tools/build/echoManifest';
 
 export default class StartApp extends Command {
     public static description = 'Create Echo Module Manifest';
 
     public async run(): Promise<void> {
-        const currentDir = process.cwd();
-        await createEchoModuleManifest(currentDir);
+        // const currentDir = process.cwd();
+        // const echoModuleConfig = await getEchoModuleConfig(currentDir);
+        // await createEchoModuleManifest(echoModuleConfig, currentDir);
+        console.log('hello form maifest');
     }
 }
 

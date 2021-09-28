@@ -1,0 +1,27 @@
+import chalk from 'chalk';
+import * as fs from 'fs';
+import path from 'path';
+import { promisify } from 'util';
+
+const access = promisify(fs.access);
+
+export default async function getFilePath(currentDir: string, fileName: string): Promise<string> {
+    const currentPath = path.join(currentDir, `${fileName}`);
+
+    try {
+        await access(currentPath, fs.constants.R_OK);
+        return currentPath;
+    } catch (err) {
+        if (err instanceof Error) {
+            console.error(`%s Cant access ${fileName}`, chalk.red.bold('ERROR'));
+            process.exit(1);
+        } else {
+            throw err;
+        }
+    }
+}
+
+export async function getFile<T>(currentDir: string, filePath: string): Promise<T> {
+    const path = await getFilePath(currentDir, filePath);
+    return JSON.parse(fs.readFileSync(path).toString()) as T;
+}
