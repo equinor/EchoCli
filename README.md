@@ -10,4 +10,4 @@ Cli for creation and building Echo Modules
 
 https://github.com/equinor/EchoFramework/tree/main/packages/EchoCli
 
-We're keeping is repo still, to have the history of all the PRs and commits.
+We're keeping the repo still, to have the history of all the PRs and commits.
