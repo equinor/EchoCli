@@ -75,7 +75,7 @@
         "@svgr/webpack": "^5.5.0",
         "assert": "^2.0.0",
         "autoprefixer": "^10.2.5",
-        "axios": "^0.21.1",
+        "axios": "^0.21.3",
         "babel-loader": "^8.2.2",
         "babel-polyfill": "^6.26.0",
         "chalk": "^4.1.0",
