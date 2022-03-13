@@ -65,7 +65,7 @@
         "@equinor/echo-scripts": "^0.1.5",
         "@equinor/echo-update": "^1.0.5",
         "@oclif/command": "^1.8.0",
-        "@pmmmwh/react-refresh-webpack-plugin": "^0.4.3",
+        "@pmmmwh/react-refresh-webpack-plugin": "^0.5.0",
         "@rollup/plugin-babel": "^5.3.0",
         "@rollup/plugin-commonjs": "^20.0.0",
         "@rollup/plugin-json": "^4.1.0",
@@ -115,8 +115,8 @@
         "webpack": "^5.52.0",
         "webpack-bundle-analyzer": "^4.4.2",
         "webpack-dev-middleware": "^3.7.3",
-        "webpack-dev-server": "^4.1.0",
-        "webpack-hot-middleware": "^2.25.0",
+        "webpack-dev-server": "^4.1.1",
+        "webpack-hot-middleware": "^2.25.1",
         "webpackbar": "^5.0.0-3"
     }
 }
