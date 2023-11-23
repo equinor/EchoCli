@@ -1,6 +1,6 @@
 ![logo](/doc/ee.png)
 
-# EchoCli
+# ~~EchoCli~~ is now Archived (on Nov 24, 2021)
 
 Cli for creation and building Echo Modules
 
